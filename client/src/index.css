@@ -10,3 +10,18 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smooothing: grayscale;
 }
+
+/* ---- Layout control: desktop locks body scroll, inner panel scrolls --- */
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+/* lock the page: only monitor scrolls */
+body {
+  overflow: hidden;
+}
+
+/* hide scrollbars where we want but allow scrolling */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

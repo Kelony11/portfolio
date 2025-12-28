@@ -51,18 +51,18 @@ const BioContent = () => {
       <div className="bio-section">
         <h3>Interests</h3>
         <p>
-          I started my journey in web development with a curiosity about how websites work. 
-          Over the years, I've developed skills in both frontend and backend technologies, 
-          allowing me to build full-stack applications from the ground up.
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+          when an unknown printer took a galley of type and scrambled it to make a type specimen book.
         </p>
       </div>
 
       <div className="bio-section">
         <h3>Philosophy</h3>
         <p>
-          I started my journey in web development with a curiosity about how websites work. 
-          Over the years, I've developed skills in both frontend and backend technologies, 
-          allowing me to build full-stack applications from the ground up.
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+          when an unknown printer took a galley of type and scrambled it to make a type specimen book.
         </p>
       </div>
 
@@ -70,9 +70,9 @@ const BioContent = () => {
         <h3>Education</h3>
         <p>
           Bachelor's Degree in Computer Science<br/>
-          I started my journey in web development with a curiosity about how websites work. 
-          Over the years, I've developed skills in both frontend and backend technologies, 
-          allowing me to build full-stack applications from the ground up.
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+          Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+          when an unknown printer took a galley of type and scrambled it to make a type specimen book.
         </p>
       </div>
 

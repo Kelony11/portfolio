@@ -1,27 +1,26 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Nicer default font + smooth redendering */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smooothing: grayscale;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* ---- Layout control: desktop locks body scroll, inner panel scrolls --- */
 html, body, #root {
   height: 100%;
   width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
-/* lock the page: only monitor scrolls */
 body {
   overflow: hidden;
 }
 
-/* hide scrollbars where we want but allow scrolling */
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+* {
+  box-sizing: border-box;
+}

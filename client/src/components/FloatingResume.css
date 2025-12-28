@@ -1,0 +1,111 @@
+.floating-resume {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  border: 3px solid #ffffff;
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.4);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.floating-resume:hover {
+  transform: scale(1.1) translateY(-5px);
+  box-shadow: 0 12px 32px rgba(124, 58, 237, 0.6);
+  animation: none;
+}
+
+.floating-resume:active {
+  transform: scale(0.95);
+}
+
+.resume-icon {
+  font-size: 2rem;
+}
+
+.resume-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.resume-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.resume-content {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 12px;
+  color: #000000;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .floating-resume {
+    width: 60px;
+    height: 60px;
+    bottom: 1rem;
+    left: 1rem;
+  }
+
+  .resume-icon {
+    font-size: 1.5rem;
+  }
+
+  .resume-label {
+    font-size: 0.6rem;
+  }
+}
+
+/* Light theme */
+.app.light .floating-resume {
+  border-color: #000000;
+  box-shadow: 0 8px 24px rgba(91, 33, 182, 0.4);
+}
+
+.app.light .floating-resume:hover {
+  box-shadow: 0 12px 32px rgba(91, 33, 182, 0.6);
+}

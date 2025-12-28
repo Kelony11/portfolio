@@ -1,0 +1,159 @@
+.content-monitor {
+  flex: 1;
+  border: 3px solid #7c3aed;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; /* Important: container doesn't scroll */
+  min-height: 0; /* Important for flex child */
+  position: relative;
+  background: rgba(124, 58, 237, 0.05);
+}
+
+.monitor-header {
+  padding: 1.5rem;
+  border-bottom: 2px solid #7c3aed;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.monitor-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.monitor-subtitle {
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+.monitor-content {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  min-height: 0;
+}
+
+/* CRITICAL: This is where scrolling happens */
+.scrollable-area {
+  flex: 1;
+  overflow-y: auto; /* ONLY THIS ELEMENT SCROLLS */
+  overflow-x: hidden;
+  padding: 2rem;
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar styling */
+.scrollable-area::-webkit-scrollbar {
+  width: 12px;
+}
+
+.scrollable-area::-webkit-scrollbar-track {
+  background: rgba(124, 58, 237, 0.1);
+  border-radius: 10px;
+}
+
+.scrollable-area::-webkit-scrollbar-thumb {
+  background: #7c3aed;
+  border-radius: 10px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.scrollable-area::-webkit-scrollbar-thumb:hover {
+  background: #a855f7;
+  background-clip: padding-box;
+}
+
+/* Firefox scrollbar */
+.scrollable-area {
+  scrollbar-width: thin;
+  scrollbar-color: #7c3aed rgba(124, 58, 237, 0.1);
+}
+
+.scroll-indicator {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 16px;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.scroll-track {
+  width: 4px;
+  height: 100%;
+  background: rgba(124, 58, 237, 0.2);
+  border-radius: 2px;
+}
+
+.github-link {
+  padding: 1rem;
+  border-top: 2px solid #7c3aed;
+  display: flex;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.github-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  border: 2px solid #7c3aed;
+  border-radius: 8px;
+  color: inherit;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.github-btn:hover {
+  background: rgba(124, 58, 237, 0.2);
+  transform: translateY(-2px);
+}
+
+.github-btn svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Light theme adjustments */
+.app.light .content-monitor {
+  border-color: #5b21b6;
+  background: rgba(91, 33, 182, 0.05);
+}
+
+.app.light .monitor-header {
+  border-color: #5b21b6;
+}
+
+.app.light .github-link {
+  border-color: #5b21b6;
+}
+
+.app.light .github-btn {
+  border-color: #5b21b6;
+}
+
+.app.light .github-btn:hover {
+  background: rgba(91, 33, 182, 0.2);
+}
+
+.app.light .scrollable-area::-webkit-scrollbar-track {
+  background: rgba(91, 33, 182, 0.1);
+}
+
+.app.light .scrollable-area::-webkit-scrollbar-thumb {
+  background: #5b21b6;
+}
+
+.app.light .scrollable-area::-webkit-scrollbar-thumb:hover {
+  background: #7c3aed;
+}

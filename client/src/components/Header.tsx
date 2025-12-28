@@ -13,7 +13,7 @@ const Header = ({ theme, viewMode, toggleTheme }: HeaderProps) => {
       <div className="profile-section">
         <div className="profile-picture">
           <img 
-            src="/api/placeholder/200/200" 
+            src="/public/test_image.png" 
             alt="Profile" 
           />
         </div>

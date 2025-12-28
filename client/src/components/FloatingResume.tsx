@@ -37,18 +37,21 @@ const FloatingResume = () => {
       {isOpen && (
         <div className="resume-modal" onClick={handleClose}>
           <div className="resume-viewer" onClick={(e) => e.stopPropagation()}>
-            <button className="close-btn" onClick={handleClose} aria-label="Close resume">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <line x1="18" y1="6" x2="6" y2="18"/>
-                <line x1="6" y1="6" x2="18" y2="18"/>
-              </svg>
-            </button>
+            <div className="resume-header">
+              <h3>My Resume</h3>
+              <button className="close-btn" onClick={handleClose} aria-label="Close resume">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <line x1="18" y1="6" x2="6" y2="18"/>
+                  <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+              </button>
+            </div>
             
             <div className="pdf-container">
-              <iframe
-                src="/Resume.pdf"
-                title="Resume"
-                className="pdf-frame"
+              <embed
+                src="/Resume.pdf#toolbar=0&navpanes=0&scrollbar=1"
+                type="application/pdf"
+                className="pdf-embed"
               />
             </div>
             
@@ -62,7 +65,7 @@ const FloatingResume = () => {
                 <polyline points="7 10 12 15 17 10"/>
                 <line x1="12" y1="15" x2="12" y2="3"/>
               </svg>
-              Download PDF
+              Download Resume
             </a>
           </div>
         </div>

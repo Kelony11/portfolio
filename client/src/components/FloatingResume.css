@@ -70,7 +70,6 @@
   z-index: 2000;
   animation: fadeIn 0.25s ease;
   padding: 2rem;
-  backdrop-filter: blur(4px);
 }
 
 @keyframes fadeIn {

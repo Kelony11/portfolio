@@ -566,3 +566,72 @@
     left: -2.5rem;
   }
 }
+
+/* Skills list inside cards */
+.skill-list {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0 0;
+  text-align: left;
+}
+
+.skill-list li {
+  padding: 0.4rem 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+  border-bottom: 1px solid rgba(124, 58, 237, 0.1);
+}
+
+.skill-list li:last-child {
+  border-bottom: none;
+}
+
+/* Technical Categories */
+.tech-categories {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.tech-category h4 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: #7c3aed;
+}
+
+.app.light .tech-category h4 {
+  color: #5b21b6;
+}
+
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.tech-tag {
+  padding: 0.5rem 1rem;
+  background: rgba(124, 58, 237, 0.15);
+  border: 1px solid #7c3aed;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.tech-tag:hover {
+  background: rgba(124, 58, 237, 0.25);
+  transform: translateY(-2px);
+}
+
+/* Update skill icon to work with SVGs */
+.skill-icon svg {
+  width: 48px;
+  height: 48px;
+  color: #7c3aed;
+}
+
+.app.light .skill-icon svg {
+  color: #5b21b6;
+}

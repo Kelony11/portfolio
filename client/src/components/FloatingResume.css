@@ -1,9 +1,9 @@
 .floating-resume {
   position: fixed;
-  bottom: 2rem;
-  left: 2rem;
-  width: 80px;
-  height: 80px;
+  top: 10rem; /* this moves the resume button down */
+  right: 2rem;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   background: linear-gradient(135deg, #7c3aed, #a855f7);
   border: 3px solid #ffffff;
@@ -28,6 +28,15 @@
   }
 }
 
+.app.mobile .floating-resume {
+  bottom: 1rem;
+  top: auto;
+  left: 1rem;
+  right: auto;
+  width: 60px;
+  height: 60px;
+}
+
 .floating-resume:hover {
   transform: scale(1.1) translateY(-5px);
   box-shadow: 0 12px 32px rgba(124, 58, 237, 0.6);
@@ -46,14 +55,25 @@
 
 .resume-icon svg {
   color: #ffffff;
+  width: 28px;
+  height: 28px;
+}
+
+.app.mobile .resume-icon svg {
+  width: 24px;
+  height: 24px;
 }
 
 .resume-label {
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 700;
   color: #ffffff;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+}
+
+.app.mobile .resume-label {
+  font-size: 0.6rem;
 }
 
 /* Modal Overlay */
@@ -187,26 +207,15 @@
 
 .download-btn:hover {
   background: linear-gradient(135deg, #a855f7, #7c3aed);
+  padding: 1.35rem 1.25rem;
+}
+
+.download-btn svg {
+  color: #ffffff;
 }
 
 /* Mobile adjustments */
 @media (max-width: 768px) {
-  .floating-resume {
-    width: 60px;
-    height: 60px;
-    bottom: 1rem;
-    left: 1rem;
-  }
-
-  .resume-icon svg {
-    width: 24px;
-    height: 24px;
-  }
-
-  .resume-label {
-    font-size: 0.6rem;
-  }
-
   .resume-modal {
     padding: 0.5rem;
   }

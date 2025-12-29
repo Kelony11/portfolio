@@ -1,13 +1,18 @@
 .content-monitor {
+  margin-top: 6rem;
   flex: 1;
   border: 3px solid #7c3aed;
   border-radius: 16px;
   display: flex;
   flex-direction: column;
-  overflow: hidden; /* Important: container doesn't scroll */
-  min-height: 0; /* Important for flex child */
+  overflow: hidden;
+  min-height: 0;
   position: relative;
   background: rgba(124, 58, 237, 0.05);
+}
+
+.app.mobile .content-monitor {
+  margin-top: 0;
 }
 
 .monitor-header {

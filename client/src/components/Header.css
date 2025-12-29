@@ -1,30 +1,29 @@
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 2rem;
-  flex-shrink: 0;
-}
-
-.profile-section {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
   display: flex;
   align-items: center;
   gap: 1.5rem;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.header.mobile {
+  position: relative;
+  top: 0;
+  left: 0;
+  margin-bottom: 1rem;
 }
 
 .profile-picture {
-  width: 120px;
-  height: 120px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   overflow: hidden;
   border: 3px solid #7c3aed;
   box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
   flex-shrink: 0;
-}
-
-.header.mobile .profile-picture {
-  width: 80px;
-  height: 80px;
 }
 
 .profile-picture img {
@@ -34,6 +33,9 @@
 }
 
 .theme-toggle {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -45,6 +47,13 @@
   justify-content: center;
   transition: all 0.3s ease;
   color: inherit;
+  z-index: 10;
+}
+
+.header.mobile .theme-toggle {
+  position: relative;
+  top: 0;
+  right: 0;
 }
 
 .theme-toggle:hover {

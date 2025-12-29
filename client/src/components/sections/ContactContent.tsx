@@ -103,7 +103,9 @@ const ContactContent = () => {
         I'm always open to new opportunities and interesting projects. 
         Feel free to reach out if you'd like to collaborate or just want to say hi!
       </p>
-
+      <h3><strong>Please note: </strong>You may send only one message every seven days</h3>
+      <br></br>
+      <br></br>
       <div className="contact-form-wrapper-centered">
         {submitted ? (
           <div className="success-message">

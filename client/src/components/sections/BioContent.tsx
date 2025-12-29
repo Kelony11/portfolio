@@ -49,8 +49,8 @@ const BioContent = () => {
             <h4>Backend</h4>
             <ul className="skill-list">
               <li>Python</li>
-              <li>Node.js/Express</li>
-              <li>C/C++</li>
+              <li>Node.js / Express</li>
+              <li>C / C++</li>
               <li>Rust</li>
             </ul>
 

@@ -39,14 +39,14 @@
 
 .app.mobile .floating-resume {
   position: fixed;
-  top: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-  right: auto;
+  top: 5rem;
+  right: 1rem;
+  left: auto;
   bottom: auto;
-  width: 60px;
-  height: 60px;
-  animation: float-mobile 3s ease-in-out infinite;
+  transform: none;
+  width: 70px;
+  height: 70px;
+  animation: float 3s ease-in-out infinite;
 }
 
 .floating-resume:hover {

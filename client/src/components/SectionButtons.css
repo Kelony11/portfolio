@@ -16,6 +16,8 @@
   transform: none;
   width: 100%;
   margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
   justify-content: space-between;
   gap: 0.5rem;
 }
@@ -33,11 +35,12 @@
   position: relative;
   overflow: hidden;
   text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .section-buttons.mobile .section-btn {
-  padding: 0.75rem 1rem;
-  font-size: 0.9rem;
+  padding: 0.65rem 0.4rem;
+  font-size: 0.75rem;
   flex: 1;
   min-width: 0;
 }

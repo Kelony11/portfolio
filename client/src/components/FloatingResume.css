@@ -1,6 +1,6 @@
 .floating-resume {
   position: fixed;
-  top: 10rem; /* this moves the resume button down */
+  top: 9rem;
   right: 2rem;
   width: 70px;
   height: 70px;
@@ -28,13 +28,25 @@
   }
 }
 
+@keyframes float-mobile {
+  0%, 100% {
+    transform: translate(-50%, 0px);
+  }
+  50% {
+    transform: translate(-50%, -10px);
+  }
+}
+
 .app.mobile .floating-resume {
-  bottom: 1rem;
-  top: auto;
-  left: 1rem;
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
   right: auto;
+  bottom: auto;
   width: 60px;
   height: 60px;
+  animation: float-mobile 3s ease-in-out infinite;
 }
 
 .floating-resume:hover {
@@ -43,8 +55,17 @@
   animation: none;
 }
 
+.app.mobile .floating-resume:hover {
+  transform: translate(-50%, -5px) scale(1.1);
+  animation: none;
+}
+
 .floating-resume:active {
   transform: scale(0.95);
+}
+
+.app.mobile .floating-resume:active {
+  transform: translateX(-50%) scale(0.95);
 }
 
 .resume-icon {
@@ -73,7 +94,7 @@
 }
 
 .app.mobile .resume-label {
-  font-size: 0.6rem;
+  font-size: 0.55rem;
 }
 
 /* Modal Overlay */

@@ -94,6 +94,53 @@ body, html {
   }
 }
 
+.theme-toggle {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid #7c3aed;
+  background: rgba(124, 58, 237, 0.1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  color: inherit;
+  z-index: 10;
+}
+
+.app.mobile .theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+}
+
+.theme-toggle:hover {
+  background: rgba(124, 58, 237, 0.2);
+  transform: scale(1.1);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+.theme-toggle svg {
+  width: 24px;
+  height: 24px;
+}
+
+.app.light .theme-toggle {
+  border-color: #5b21b6;
+  background: rgba(91, 33, 182, 0.1);
+}
+
+.app.light .theme-toggle:hover {
+  background: rgba(91, 33, 182, 0.2);
+}
+
 /* Make all content appear above the stars */
 .app > * {
   position: relative;

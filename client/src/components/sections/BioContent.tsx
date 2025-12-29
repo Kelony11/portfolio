@@ -135,15 +135,15 @@ const BioContent = () => {
               <span className="tech-tag">AWS (EC2)</span>
               <span className="tech-tag">Docker</span>
               <span className="tech-tag">GitHub Actions</span>
-              <span className="tech-tag">Git (GitHub/Bitbucket)</span>
+              <span className="tech-tag">Git</span>
+              <span className="tech-tag">Postman</span>
               <span className="tech-tag">Linux/Unix</span>
             </div>
           </div>
 
           <div className="tech-category">
-            <h4>Tools & Testing</h4>
+            <h4>Testing</h4>
             <div className="tech-tags">
-              <span className="tech-tag">Postman</span>
               <span className="tech-tag">Jasmine</span>
               <span className="tech-tag">Pytest</span>
             </div>

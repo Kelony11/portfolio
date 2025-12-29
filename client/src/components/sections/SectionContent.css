@@ -733,3 +733,42 @@
 .success-icon svg {
   color: #10b981;
 }
+
+/* Centered Contact Form */
+.contact-form-wrapper-centered {
+  max-width: 100%;
+  margin: 0 0 3rem 0;
+}
+
+.contact-form-wrapper-centered h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #7c3aed;
+  text-align: center;
+}
+
+.app.light .contact-form-wrapper-centered h3 {
+  color: #5b21b6;
+}
+
+/* Social Links at Bottom */
+.social-links-bottom {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.social-links-bottom h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #7c3aed;
+}
+
+.app.light .social-links-bottom h3 {
+  color: #5b21b6;
+}
+
+.social-links-bottom .social-icons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}

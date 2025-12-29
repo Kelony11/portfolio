@@ -7,18 +7,14 @@ const BioContent = () => {
       
       <div className="bio-intro">
         <p>
-          Hey there! Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
-          standard dummy text ever since the 1500s, 
-          when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+          I'm a curious and driven Software Engineering grad student at Rutgers who enjoys building backend systems that solve real-world problems. I thrive in collaborative environments where I can turn ideas into clean, scalable, and user-focused solutions.
         </p>
       </div>
 
       <div className="bio-section">
         <h3>Background</h3>
         <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
-          standard dummy text ever since the 1500s, 
-          when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+          I've completed internships at Johnson & Johnson and Cisco, where I built internal tools, automated workflows, and developed APIs using Python, React, and SQL. My academic projects span systems programming, compilers, and full-stack development with deployments on AWS and Firebase.
         </p>
       </div>
 
@@ -34,10 +30,11 @@ const BioContent = () => {
             </div>
             <h4>Frontend</h4>
             <ul className="skill-list">
-              <li>React & TypeScript</li>
-              <li>Next.js</li>
-              <li>Tailwind CSS</li>
-              <li>Responsive Design</li>
+              <li>React</li>
+              <li>TypeScript / JavaScript</li>
+              <li>SwiftUI</li>
+              <li>Vite</li>
+              <li></li>
             </ul>
           </div>
           
@@ -51,11 +48,13 @@ const BioContent = () => {
             </div>
             <h4>Backend</h4>
             <ul className="skill-list">
-              <li>Node.js & Express</li>
-              <li>Python & Django</li>
-              <li>PostgreSQL & MongoDB</li>
-              <li>REST APIs</li>
+              <li>Python</li>
+              <li>Node.js/Express</li>
+              <li>C/C++</li>
+              <li>Rust</li>
             </ul>
+
+          
           </div>
           
           <div className="skill-card">
@@ -68,12 +67,12 @@ const BioContent = () => {
                 <path d="M4.93 19.07l4.24-4.24m5.66-5.66l4.24-4.24"/>
               </svg>
             </div>
-            <h4>Tools & DevOps</h4>
+            <h4>Databases</h4>
             <ul className="skill-list">
-              <li>Git & GitHub</li>
-              <li>Docker</li>
-              <li>AWS & Firebase</li>
-              <li>CI/CD Pipelines</li>
+              <li>PostgreSQL</li>
+              <li>Google Firestore</li>
+              <li>MongoDB Atlas</li>
+              <li>SQL</li>
             </ul>
           </div>
           
@@ -88,12 +87,12 @@ const BioContent = () => {
                 <line x1="12" y1="22.08" x2="12" y2="12"/>
               </svg>
             </div>
-            <h4>Design</h4>
+            <h4>Cloud Integration</h4>
             <ul className="skill-list">
-              <li>Figma</li>
-              <li>Adobe XD</li>
-              <li>UI/UX Principles</li>
-              <li>Prototyping</li>
+              <li>AWS EC2</li>
+              <li>Firebase</li>
+              <li>Docker</li>
+              <li>GitHub Actions</li>
             </ul>
           </div>
         </div>

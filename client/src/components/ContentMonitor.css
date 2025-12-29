@@ -41,7 +41,7 @@
   min-height: 0;
 }
 
-/* CRITICAL: This is where scrolling happens */
+/* This is where scrolling happens */
 .scrollable-area {
   flex: 1;
   overflow-y: auto; /* ONLY THIS ELEMENT SCROLLS */

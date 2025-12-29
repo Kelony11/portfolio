@@ -35,9 +35,9 @@ const BioContent = () => {
             <h4>Frontend</h4>
             <ul className="skill-list">
               <li>React & TypeScript</li>
-              <li>Next.js</li>
-              <li>Tailwind CSS</li>
-              <li>Responsive Design</li>
+              <li>JavaScript/TypeScript</li>
+              <li>SwiftUI</li>
+              <li>TanStack Router</li>
             </ul>
           </div>
           
@@ -52,48 +52,41 @@ const BioContent = () => {
             <h4>Backend</h4>
             <ul className="skill-list">
               <li>Node.js & Express</li>
-              <li>Python & Django</li>
-              <li>PostgreSQL & MongoDB</li>
-              <li>REST APIs</li>
+              <li>Python</li>
+              <li>Swift</li>
+              <li>Sequelize</li>
             </ul>
           </div>
           
           <div className="skill-card">
             <div className="skill-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="12" cy="12" r="3"/>
-                <path d="M12 1v6m0 6v6"/>
-                <path d="M1 12h6m6 0h6"/>
-                <path d="M4.93 4.93l4.24 4.24m5.66 5.66l4.24 4.24"/>
-                <path d="M4.93 19.07l4.24-4.24m5.66-5.66l4.24-4.24"/>
+                <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
               </svg>
             </div>
-            <h4>Tools & DevOps</h4>
+            <h4>Database</h4>
             <ul className="skill-list">
-              <li>Git & GitHub</li>
+              <li>PostgreSQL</li>
+              <li>Firebase Firestore</li>
+              <li>SQL</li>
+              <li>REST/JSON APIs</li>
+            </ul>
+          </div>
+          
+          <div className="skill-card">
+            <div className="skill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
+              </svg>
+            </div>
+            <h4>Cloud</h4>
+            <ul className="skill-list">
+              <li>AWS (EC2)</li>
+              <li>Firebase (Auth, Storage)</li>
               <li>Docker</li>
-              <li>AWS & Firebase</li>
-              <li>CI/CD Pipelines</li>
-            </ul>
-          </div>
-          
-          <div className="skill-card">
-            <div className="skill-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                <polyline points="7.5 4.21 12 6.81 16.5 4.21"/>
-                <polyline points="7.5 19.79 7.5 14.6 3 12"/>
-                <polyline points="21 12 16.5 14.6 16.5 19.79"/>
-                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-                <line x1="12" y1="22.08" x2="12" y2="12"/>
-              </svg>
-            </div>
-            <h4>Design</h4>
-            <ul className="skill-list">
-              <li>Figma</li>
-              <li>Adobe XD</li>
-              <li>UI/UX Principles</li>
-              <li>Prototyping</li>
+              <li>GitHub Actions</li>
             </ul>
           </div>
         </div>
@@ -105,11 +98,12 @@ const BioContent = () => {
           <div className="tech-category">
             <h4>Languages</h4>
             <div className="tech-tags">
+              <span className="tech-tag">Python</span>
               <span className="tech-tag">JavaScript</span>
               <span className="tech-tag">TypeScript</span>
-              <span className="tech-tag">Python</span>
-              <span className="tech-tag">Java</span>
+              <span className="tech-tag">Swift</span>
               <span className="tech-tag">SQL</span>
+              <span className="tech-tag">C/C++</span>
             </div>
           </div>
           
@@ -117,21 +111,41 @@ const BioContent = () => {
             <h4>Frameworks & Libraries</h4>
             <div className="tech-tags">
               <span className="tech-tag">React</span>
-              <span className="tech-tag">Next.js</span>
               <span className="tech-tag">Node.js</span>
               <span className="tech-tag">Express</span>
-              <span className="tech-tag">Django</span>
-              <span className="tech-tag">Flask</span>
+              <span className="tech-tag">SwiftUI</span>
+              <span className="tech-tag">TanStack Router</span>
+              <span className="tech-tag">Sequelize</span>
             </div>
           </div>
           
           <div className="tech-category">
-            <h4>Databases</h4>
+            <h4>Database & APIs</h4>
             <div className="tech-tags">
               <span className="tech-tag">PostgreSQL</span>
-              <span className="tech-tag">MongoDB</span>
-              <span className="tech-tag">Redis</span>
-              <span className="tech-tag">MySQL</span>
+              <span className="tech-tag">Firebase Firestore</span>
+              <span className="tech-tag">Google Firestore</span>
+              <span className="tech-tag">REST/JSON</span>
+            </div>
+          </div>
+
+          <div className="tech-category">
+            <h4>DevOps & Tools</h4>
+            <div className="tech-tags">
+              <span className="tech-tag">AWS (EC2)</span>
+              <span className="tech-tag">Docker</span>
+              <span className="tech-tag">GitHub Actions</span>
+              <span className="tech-tag">Git (GitHub/Bitbucket)</span>
+              <span className="tech-tag">Linux/Unix</span>
+            </div>
+          </div>
+
+          <div className="tech-category">
+            <h4>Tools & Testing</h4>
+            <div className="tech-tags">
+              <span className="tech-tag">Postman</span>
+              <span className="tech-tag">Jasmine</span>
+              <span className="tech-tag">Pytest</span>
             </div>
           </div>
         </div>

@@ -113,9 +113,9 @@ body, html {
 }
 
 .app.mobile .theme-toggle {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
+  position: fixed !important;
+  top: 1rem !important;
+  right: 1rem !important;
 }
 
 .theme-toggle:hover {

@@ -141,7 +141,7 @@ const ContactContent = () => {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="your.email@example.com"
+                placeholder="email@example.com"
                 className={errors.email ? 'error' : ''}
               />
               {errors.email && <span className="error-message">{errors.email}</span>}
@@ -155,7 +155,7 @@ const ContactContent = () => {
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
-                placeholder="+1 (234) 567-890"
+                placeholder="+1 (234) 567-8901"
               />
             </div>
 

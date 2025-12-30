@@ -25,11 +25,17 @@ app.use(helmet());
 // Parse Json bodies
 app.use(express.json({ limit: "64kb" }));
 
+// Alllow mutliple dev ports (localhost) 
+const allowedOrigins = [process.env.CLIENT_URL].filter(
+    (origin): origin is string => Boolean(origin)
+);
+
 // CORS (allow your react dev server)
 app.use(
     cors({
-        origin: ["http://localhost:5174"], 
+        origin: allowedOrigins, 
         methods: ["GET", "POST", "PUT", "DELETE"],
+        credentials: true,
     })
 );
 

@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, type ChangeEvent, type FormEvent } from 'react';
 import './SectionContent.css';
+
+const API_URL = import.meta.env.VITE_API_URL
 
 const ContactContent = () => {
   const [formData, setFormData] = useState({
@@ -19,7 +21,12 @@ const ContactContent = () => {
 
   const [submitted, setSubmitted] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  // ADDING UX States: loading + success + error messages for submit 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null)
+  const [submitSuccess, setSubmitSuccess] = useState<string | null>(null);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -68,32 +75,74 @@ const ContactContent = () => {
     return isValid;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  // Implementing fetch/axios (Collecting data from contact form and send it to backend) 
+
+  const handleSubmit = async (e: FormEvent) => {
+  
     e.preventDefault();
 
     if (!validateForm()) {
       return;
     }
 
-    // Integrate with a backend later
-    console.log('Form submitted:', formData);
+    // Start submit (lock button + clear messages)
+    setIsSubmitting(true);
+    setSubmitError(null);
+    setSubmitSuccess(null);
 
-    // Simulate API call
-    setTimeout(() => {
-      setSubmitted(true);
-      // Reset form
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        phoneType: '',
-        message: '',
-        wantsReply: 'yes'
+    try {
+      
+      // Integrate with a backend 
+      const payload = {
+        ...formData,
+        wantsReply: formData.wantsReply,
+      };
+
+      const res = await fetch(`${API_URL}/api/contact`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify(payload),
       });
-      // Hide success message after 5 seconds
-      setTimeout(() => setSubmitted(false), 5000);
-    }, 500);
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        // Handle the 7-day limit cleanly
+        if (res.status === 429 && data?.error === "MESSAGE_LIMIT") {
+          // Show try again after 7 days 
+          throw new Error(data.message);
+        }
+
+        throw new Error(data?.message || "Failed to send message");
+      }
+      
+      // Success UI (Message Sent)
+      setSubmitSuccess("Message sent!");
+      setSubmitted(true);
+
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        phoneType: "",
+        message: "",
+        wantsReply: "yes",
+      });
+
+    } catch (error: unknown) {
+      // Error UI
+      const message = error instanceof Error ? error.message : "Something went wrong.";
+
+      setSubmitError(message);
+
+    } finally {
+      // End submit (unlock button)
+
+      setIsSubmitting(false);
+    }
+
   };
+
 
   return (
     <div className="section-content contact-content">
@@ -213,9 +262,12 @@ const ContactContent = () => {
                 </label>
               </div>
             </div>
+            
+            {submitSuccess && <p className='success-message'>{submitSuccess}</p>}
+            {submitError && <p className='error-message'>{submitError}</p>}
 
-            <button type="submit" className="submit-btn">
-              Send Message
+            <button type="submit" className="submit-btn" disabled={isSubmitting}>
+              {isSubmitting ? "Sending..." : "Send Message"}
             </button>
           </form>
         )}

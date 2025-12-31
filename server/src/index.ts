@@ -33,9 +33,14 @@ const allowedOrigins = [process.env.CLIENT_URL].filter(
 // CORS (allow your react dev server)
 app.use(
     cors({
-        origin: allowedOrigins, 
+        origin: (origin, callback) => {
+            // allow non-browser tools (curl/postman) with no origin 
+            if (!origin) return callback(null, true);
+            if (allowedOrigins.includes(origin)) return callback(null, true);
+
+            return callback(new Error(`❌ CORS blocked: ${origin}`));
+        }, 
         methods: ["GET", "POST", "PUT", "DELETE"],
-        credentials: true,
     })
 );
 
@@ -53,6 +58,8 @@ app.listen(PORT, () => {
     console.log(`✅ Success: Backend running on http://localhost:${PORT}`);
 });
 
+
+
 // Function: Post info from frontend to the Database
 app.post("/api/contact", async (req, res) => {
     
@@ -63,13 +70,37 @@ app.post("/api/contact", async (req, res) => {
             return res.status(400).json({ ok: false, error: "Missing fields" });
         }
 
+        // ENFORCING " 1 Message per 7 days" check 
+
+        // 7 days, 24 Hours, 60 Minutes, 1000 millisec.
+        const SEVEN_DAYS_MS = 7 * 24 * 60 * 1000;
+        
+        const since = new Date(Date.now() - SEVEN_DAYS_MS)
+
+        const recent = await Contact.findOne({
+            email: email.toLowerCase().trim(),
+            createdAt: { $gte: since }, 
+        }).sort({ createdAt: -1 });
+
+        if (recent) {
+            const nextAllowedAt = new Date(recent.createdAt.getTime() + SEVEN_DAYS_MS);
+
+            return res.status(429).json({
+                ok: false,
+                error: "MESSAGE_LIMIT",
+                message: "You can only send one message every 7 days.",
+                nextAllowedAt: nextAllowedAt.toISOString(),
+            });
+        }
+
+
         const doc = await Contact.create({
             name,
-            email, 
+            email: email.toLowerCase().trim(), 
             message,
             phone: phone || undefined,
             phoneType: phoneType || undefined,
-            wantsReply: wantsReply === "yes",
+            wantsReply: wantsReply === "yes" || wantsReply === true,
         });
 
         return res.status(201).json({ ok: true, id: doc._id });

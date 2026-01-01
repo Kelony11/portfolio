@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
 
 function getInitialTheme(): 'light' | 'dark' {
+  // SSR Check
+  if (typeof window === 'undefined') return 'dark';
+  
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "light" || savedTheme === "dark") {
     return savedTheme;
   }
 
   const hour = new Date().getHours();
-  return hour >= 20 || hour < 6 ? "dark" : "light";
+  const isDark = hour >= 20 || hour < 6;
+  
+  return isDark ? "dark" : "light";
 }
 
 export default function useTheme() {

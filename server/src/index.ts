@@ -83,10 +83,14 @@ app.listen(PORT, () => {
 app.post("/api/contact", async (req, res) => {
     
     try {
-        const { name, email, message, phone, phoneType, wantsReply, turnstileToken } = req.body;
+        // Input variables
+        const { name, email, message, phone, phoneType, wantsReply, turnstileToken, company } = req.body;
+
+        // Honeypot (act like success)
+        if (company) return res.status(200).json({ ok: true });
 
         if (!name || !email || !message ) {
-            return res.status(400).json({ ok: false, error: "Missing fields" });
+            return res.status(400).json({ ok: false, error: "MISSING_FIELDS" });
         }
 
         // CAPTCHA check first before 7-day limit and accepting the message
@@ -94,21 +98,33 @@ app.post("/api/contact", async (req, res) => {
             return res.status(400).json({ ok: false, error: "CAPTCHA_REQUIRED"});
         }
 
-        const result = await verifyTurnstile(turnstileToken, req.ip);
+        // Turnstile verify: using correct client IP 
+        const ip = 
+            (req.headers["cf-connecting-ip"] as string) ||
+            (req.headers["x-forwarded-for"] as string)?.split(",")[0]?.trim() ||
+            req.ip;
+
+        const result = await verifyTurnstile(turnstileToken, ip);
 
         if (!result.success) {
-            return res.status(400).json({ ok: false, error: "CAPTCHA_FAILED" });
+            return res.status(400).json({ 
+                ok: false,
+                error: "CAPTCHA_FAILED",
+                message:  "Captcha failed. Please try again.",
+            });
         }
+
+        const normalizedEmail = String(email).toLowerCase().trim();
 
         // ENFORCING " 1 Message per 7 days" check 
 
         // 7 days, 24 Hours, 60 Minutes, 1000 millisec.
-        const SEVEN_DAYS_MS = 7 * 24 * 60 * 1000;
+        const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
         
-        const since = new Date(Date.now() - SEVEN_DAYS_MS)
+        const since = new Date(Date.now() - SEVEN_DAYS_MS);
 
         const recent = await Contact.findOne({
-            email: email.toLowerCase().trim(),
+            email: normalizedEmail,
             createdAt: { $gte: since }, 
         }).sort({ createdAt: -1 });
 
@@ -126,7 +142,7 @@ app.post("/api/contact", async (req, res) => {
 
         const doc = await Contact.create({
             name,
-            email: email.toLowerCase().trim(), 
+            email: normalizedEmail, 
             message,
             phone: phone || undefined,
             phoneType: phoneType || undefined,
@@ -136,7 +152,8 @@ app.post("/api/contact", async (req, res) => {
         return res.status(201).json({ ok: true, id: doc._id });
 
     } catch (err) {
-        return res.status(500).json({ ok: false, error: "❌ Server error" });
+        console.error("❌ /api/contact error:", err);
+        return res.status(500).json({ ok: false, error: "SERVER_ERROR" });
     }
 
 });

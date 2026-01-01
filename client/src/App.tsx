@@ -10,8 +10,10 @@ import type { Section, ViewMode } from './types';
 function App() {
   const [activeSection, setActiveSection] = useState<Section>('bio');
   const [viewMode, setViewMode] = useState<ViewMode>('desktop');
+  const [isLoading, setIsLoading] = useState(true);
   const { theme, toggleTheme } = useTheme();
 
+  // Auto-detect mobile/desktop based on screen size
   // Auto-detect mobile/desktop based on screen size
   useEffect(() => {
     const handleResize = () => {
@@ -25,6 +27,23 @@ function App() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  useEffect(() => {
+    // Small delay to ensure smooth transition
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 100);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className={`loading-screen ${theme}`}>
+        <div className="loader"></div>
+      </div>
+    );
+  }
 
   return (
     <div className={`app ${theme} ${viewMode}`}>

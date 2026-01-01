@@ -12,7 +12,7 @@ const Header = ({ viewMode }: HeaderProps) => {
     <header className={`header ${viewMode}`}>
       <div className="profile-picture">
         <img 
-          src="/public/image.jpeg"
+          src="/public/image.jpg"
           alt="Profile" 
         />
       </div>

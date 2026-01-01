@@ -42,23 +42,24 @@ app.use("/api/contact", contactLimiter);
 // Parse Json bodies
 app.use(express.json({ limit: "64kb" }));
 
-// Alllow mutliple dev ports (localhost) 
-const allowedOrigins = [process.env.CLIENT_URL].filter(
-    (origin): origin is string => Boolean(origin)
-);
+// Allow multiple dev ports + optional env var
+const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  process.env.CLIENT_URL, // optional
+].filter((origin): origin is string => Boolean(origin));
 
-// CORS (allow your react dev server)
 app.use(
-    cors({
-        origin: (origin, callback) => {
-            // allow non-browser tools (curl/postman) with no origin 
-            if (!origin) return callback(null, true);
-            if (allowedOrigins.includes(origin)) return callback(null, true);
+  cors({
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true); // Postman/curl
 
-            return callback(new Error(`❌ CORS blocked: ${origin}`));
-        }, 
-        methods: ["GET", "POST", "PUT", "DELETE"],
-    })
+      if (allowedOrigins.includes(origin)) return callback(null, true);
+
+      return callback(new Error(`❌ CORS blocked: ${origin}`));
+    },
+    methods: ["GET", "POST", "PUT", "DELETE"],
+  })
 );
 
 // Health check

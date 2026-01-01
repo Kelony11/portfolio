@@ -3,6 +3,16 @@
   animation: fadeIn 0.5s ease;
 }
 
+/* Hide the honeypot bot trap */
+.hidden {
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  width: 1 px;
+  height: 1px;
+  opacity: 0;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import dotenv from "dotenv";
+import { verifyTurnstile } from "./turnstile";
+import rateLimit from "express-rate-limit";
 
 // External functions import 
 import { connectDB } from "./db";
@@ -13,6 +15,17 @@ const app = express();
 const PORT = process.env.PORT ? Number(process.env.PORT) : 4000;
 const MONGODB_URI = process.env.MONGODB_URI || "";
 
+// To avoid Spamming messages by the same user
+const contactLimiter = rateLimit({
+    // 10 min timer
+    windowMs: 10 * 60 * 1000,
+    max: 10,     // 10 request per IP per 10 min
+    standardHeaders: true,
+    legacyHeaders: false,
+
+});
+
+
 // Connect to MongoDB
 connectDB(MONGODB_URI).catch((err) => {
     console.error("❌ Error: Could not connect to MongoDB", err);
@@ -21,6 +34,10 @@ connectDB(MONGODB_URI).catch((err) => {
 
 // Security headers
 app.use(helmet());
+
+// rate limiting anti-bot layer
+app.use("/api/contact", contactLimiter);
+
 
 // Parse Json bodies
 app.use(express.json({ limit: "64kb" }));
@@ -53,6 +70,8 @@ app.get("/health", (_req, res) => {
     });
 });
 
+// 
+
 // Start Server
 app.listen(PORT, () => {
     console.log(`✅ Success: Backend running on http://localhost:${PORT}`);
@@ -64,10 +83,21 @@ app.listen(PORT, () => {
 app.post("/api/contact", async (req, res) => {
     
     try {
-        const { name, email, message, phone, phoneType, wantsReply } = req.body;
+        const { name, email, message, phone, phoneType, wantsReply, turnstileToken } = req.body;
 
         if (!name || !email || !message ) {
             return res.status(400).json({ ok: false, error: "Missing fields" });
+        }
+
+        // CAPTCHA check first before 7-day limit and accepting the message
+        if (!turnstileToken) {
+            return res.status(400).json({ ok: false, error: "CAPTCHA_REQUIRED"});
+        }
+
+        const result = await verifyTurnstile(turnstileToken, req.ip);
+
+        if (!result.success) {
+            return res.status(400).json({ ok: false, error: "CAPTCHA_FAILED" });
         }
 
         // ENFORCING " 1 Message per 7 days" check 

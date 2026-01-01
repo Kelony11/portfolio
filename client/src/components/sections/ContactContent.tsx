@@ -262,9 +262,10 @@ const ContactContent = () => {
                 </label>
               </div>
             </div>
-            
+
             {submitSuccess && <p className='success-message'>{submitSuccess}</p>}
             {submitError && <p className='error-message'>{submitError}</p>}
+
 
             <button type="submit" className="submit-btn" disabled={isSubmitting}>
               {isSubmitting ? "Sending..." : "Send Message"}

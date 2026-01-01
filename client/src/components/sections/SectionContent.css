@@ -772,3 +772,339 @@
   gap: 1.5rem;
   justify-content: center;
 }
+
+/* Projects Header with Filter */
+.projects-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Tech Filter Container - Top Right */
+.tech-filter-container {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.filter-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.filter-toggle-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+}
+
+.app.light .filter-toggle-btn {
+  background: linear-gradient(135deg, #5b21b6, #7c3aed);
+}
+
+/* Filter Dropdown */
+.filter-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 998;
+}
+
+.filter-dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  width: 300px;
+  max-height: 400px;
+  background: #1a1a1a;
+  border: 2px solid #7c3aed;
+  border-radius: 12px;
+  padding: 1rem;
+  z-index: 999;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  overflow-y: auto;
+}
+
+.app.light .filter-dropdown {
+  background: #ffffff;
+  border-color: #5b21b6;
+}
+
+.filter-dropdown-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #7c3aed;
+}
+
+.app.light .filter-dropdown-header {
+  border-bottom-color: #5b21b6;
+}
+
+.filter-dropdown-header h4 {
+  margin: 0;
+  font-size: 1rem;
+  color: #7c3aed;
+}
+
+.app.light .filter-dropdown-header h4 {
+  color: #5b21b6;
+}
+
+.clear-all-btn {
+  padding: 0.25rem 0.75rem;
+  background: transparent;
+  border: 1px solid #7c3aed;
+  border-radius: 6px;
+  color: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.clear-all-btn:hover {
+  background: rgba(124, 58, 237, 0.2);
+}
+
+.app.light .clear-all-btn {
+  border-color: #5b21b6;
+}
+
+/* Filter Options */
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.filter-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 6px;
+  transition: background 0.2s ease;
+}
+
+.filter-checkbox:hover {
+  background: rgba(124, 58, 237, 0.1);
+}
+
+.filter-checkbox input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkbox-custom {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #7c3aed;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.filter-checkbox input[type="checkbox"]:checked + .checkbox-custom {
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  border-color: #7c3aed;
+}
+
+.filter-checkbox input[type="checkbox"]:checked + .checkbox-custom::after {
+  content: "✓";
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.app.light .checkbox-custom {
+  border-color: #5b21b6;
+}
+
+.app.light .filter-checkbox input[type="checkbox"]:checked + .checkbox-custom {
+  background: linear-gradient(135deg, #5b21b6, #7c3aed);
+}
+
+.tech-label {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* Active Filters */
+.active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.filter-label {
+  font-weight: 600;
+  color: #7c3aed;
+}
+
+.app.light .filter-label {
+  color: #5b21b6;
+}
+
+.active-filter-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #ffffff;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.app.light .active-filter-tag {
+  background: linear-gradient(135deg, #5b21b6, #7c3aed);
+}
+
+.remove-filter {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 0.25rem;
+  transition: transform 0.2s ease;
+}
+
+.remove-filter:hover {
+  transform: scale(1.2);
+}
+
+/* Suggestion Box */
+.suggestion-box {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(124, 58, 237, 0.1);
+  border: 2px solid #7c3aed;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  color: inherit;
+}
+
+.app.light .suggestion-box {
+  background: rgba(91, 33, 182, 0.1);
+  border-color: #5b21b6;
+}
+
+.suggestion-box svg {
+  flex-shrink: 0;
+  color: #7c3aed;
+}
+
+.app.light .suggestion-box svg {
+  color: #5b21b6;
+}
+
+.suggestion-link {
+  background: none;
+  border: none;
+  color: #7c3aed;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+  font-size: inherit;
+}
+
+.suggestion-link:hover {
+  color: #a855f7;
+}
+
+.app.light .suggestion-link {
+  color: #5b21b6;
+}
+
+.app.light .suggestion-link:hover {
+  color: #7c3aed;
+}
+
+/* Projects Count */
+.projects-count {
+  margin: 1.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #7c3aed;
+}
+
+.app.light .projects-count {
+  color: #5b21b6;
+}
+
+/* No Projects */
+.no-projects {
+  text-align: center;
+  padding: 3rem;
+  border: 2px solid #7c3aed;
+  border-radius: 12px;
+  background: rgba(124, 58, 237, 0.05);
+}
+
+.no-projects p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.clear-filter-btn {
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.clear-filter-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4);
+}
+
+.app.light .clear-filter-btn {
+  background: linear-gradient(135deg, #5b21b6, #7c3aed);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .projects-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .filter-dropdown {
+    width: 100%;
+    right: 0;
+    left: 0;
+  }
+}

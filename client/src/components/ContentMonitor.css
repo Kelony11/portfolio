@@ -50,6 +50,11 @@
   scroll-behavior: smooth;
 }
 
+/* Mobile padding */
+.app.mobile .scrollable-area {
+  padding-bottom: 7rem;
+}
+
 /* Custom scrollbar styling */
 .scrollable-area::-webkit-scrollbar {
   width: 12px;

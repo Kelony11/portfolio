@@ -79,3 +79,30 @@
 .app.light .section-btn.active {
   background: linear-gradient(135deg, #5b21b6, #7c3aed);
 }
+
+.project-card {
+  border: 2px solid #7c3aed;
+  border-radius: 12px;
+  padding: 1.5rem;
+  background: rgba(124, 58, 237, 0.05);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.project-features {
+  margin: 1.5rem 0;
+  flex: 1;
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+.project-links {
+  margin-top: 0;
+}

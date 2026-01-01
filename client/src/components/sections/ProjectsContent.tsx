@@ -174,36 +174,43 @@ const ProjectsContent = () => {
 
           {isDropdownOpen && (
             <>
-              <div
-                className="filter-backdrop"
-                onClick={() => setIsDropdownOpen(false)}
-              />
-              <div className="filter-dropdown">
+                <div className="filter-backdrop" onClick={() => setIsDropdownOpen(false)} />
+                <div className="filter-dropdown">
                 <div className="filter-dropdown-header">
-                  <h4>Filter by Technology</h4>
-                  {selectedTechs.length > 0 && (
+                    <h4>Filter by Technology</h4>
+                    {selectedTechs.length > 0 && (
                     <button className="clear-all-btn" onClick={clearFilters}>
-                      Clear All
+                        Clear All
                     </button>
-                  )}
+                    )}
                 </div>
-
+                
                 <div className="filter-options">
-                  {allTechnologies.map((tech) => (
+                    {allTechnologies.map((tech) => (
                     <label key={tech} className="filter-checkbox">
-                      <input
+                        <input
                         type="checkbox"
                         checked={selectedTechs.includes(tech)}
                         onChange={() => handleTechToggle(tech)}
-                      />
-                      <span className="checkbox-custom"></span>
-                      <span className="tech-label">{tech}</span>
+                        />
+                        <span className="checkbox-custom"></span>
+                        <span className="tech-label">{tech}</span>
                     </label>
-                  ))}
+                    ))}
                 </div>
-              </div>
+
+                {/* Done button - mobile only */}
+                <div className="filter-dropdown-footer">
+                    <button 
+                    className="filter-done-btn"
+                    onClick={() => setIsDropdownOpen(false)}
+                    >
+                    Done
+                    </button>
+                </div>
+                </div>
             </>
-          )}
+            )}
         </div>
       </div>
 

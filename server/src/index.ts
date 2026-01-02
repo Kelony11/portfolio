@@ -44,8 +44,8 @@ app.use(express.json({ limit: "64kb" }));
 
 // Allow multiple dev ports + optional env var
 const allowedOrigins = [
-  "http://localhost:5173", // Vite dev server
-  "http://127.0.0.1:5173",
+  "http://localhost:5173", // Vite dev server for laptops
+  "http://10.0.0.31:5173", // Server for Kelvin's mobile (Test)
 ];
 
 app.use(

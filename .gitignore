@@ -20,3 +20,6 @@ coverage/
 
 # misc
 .vscode/
+
+# backend zip aws eb
+server-eb.zip

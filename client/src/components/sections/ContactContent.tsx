@@ -98,7 +98,7 @@ const ContactContent = () => {
       const payload = {
         ...formData,
         // ✅ send boolean to backend
-        wantsReply: formData.wantsReply === "yes",
+        wantsReply: formData.wantsReply,
         // ✅ include Turnstile token
         turnstileToken,
       };

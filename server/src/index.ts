@@ -2,10 +2,9 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import dotenv from "dotenv";
-import { verifyTurnstile } from "./turnstile";
 import rateLimit from "express-rate-limit";
 
-// External functions import 
+import { verifyTurnstile } from "./turnstile";
 import { connectDB } from "./db";
 import { Contact } from "./models/ContactSchema";
 
@@ -15,176 +14,175 @@ const app = express();
 const PORT = process.env.PORT ? Number(process.env.PORT) : 4000;
 const MONGODB_URI = process.env.MONGODB_URI || "";
 
-// Global limiter (light)
+/* =========================
+   Security & Parsing
+========================= */
 
-const globalLimiter = rateLimit({
-    windowMs: 15 * 60 * 1000,
-    max: 300, // per IP 15 min
-    standardHeaders: true,
-    legacyHeaders: false,
-});
-
-app.use(globalLimiter);
-
-// To avoid Spamming messages by the same user
-const contactLimiter = rateLimit({
-    // 10 min timer
-    windowMs: 10 * 60 * 1000,
-    max: 10,     // 10 request per IP per 10 min
-    standardHeaders: true,
-    legacyHeaders: false,
-    message: { ok: false, error: "RATE_LIMIT", message: "Too many requests. Try again later." },
-});
-
-
-// Connect to MongoDB
-connectDB(MONGODB_URI).catch((err) => {
-    console.error("❌ Error: Could not connect to MongoDB", err);
-    process.exit(1);
-});
-
-// Security headers
+// Security headers (keep once)
 app.use(helmet());
 
-// rate limiting anti-bot layer
-app.use("/api/contact", contactLimiter);
-
-
-// Parse Json bodies
+// Parse JSON with size limit (safe for contact forms)
 app.use(express.json({ limit: "50kb" }));
 
-// Add security heades (Helmet)
-app.use(helmet());
+/* =========================
+   CORS (AWS-READY)
+========================= */
 
-// Allow multiple dev ports + optional env var
+// Use env vars for production, fallback for dev/mobile testing
 const allowedOrigins = [
-  "http://localhost:5173", // Vite dev server for laptops
-  "http://10.0.0.31:5173", // Server for Kelvin's mobile (Test)
-];
+  process.env.CLIENT_URL,           // prod frontend domain
+  "http://localhost:5173",           // laptop dev
+  "http://127.0.0.1:5173",
+  "http://10.0.0.31:5173",           // mobile testing (LAN)
+].filter((o): o is string => Boolean(o));
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      // allow server-to-server & tools like curl/Postman
-      if (!origin) return callback(null, true);
+const corsOptions: cors.CorsOptions = {
+  origin: (origin, callback) => {
+    // Allow Postman / curl / server-to-server
+    if (!origin) return callback(null, true);
 
-      if (allowedOrigins.includes(origin)) {
-        return callback(null, true);
-      }
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
 
-      return callback(new Error("Not allowed by CORS"));
-    },
-    methods: ["GET", "POST", "OPTIONS"],
-    credentials: true,
-  })
-);
-
-// IMPORTANT: Allow preflight requests
-app.use(cors({
-  origin: ["http://localhost:5173"],
-  methods: ["GET","POST","PUT","DELETE"],
+    return callback(new Error(`Not allowed by CORS: ${origin}`));
+  },
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type"],
   credentials: true,
-}));
+};
 
+app.use(cors(corsOptions));
+// app.options("/*", cors(corsOptions)); // ✅ REQUIRED for browser preflight stability
 
+/* =========================
+   Rate limiting (contact only)
+========================= */
 
-// Health check
+const contactLimiter = rateLimit({
+  windowMs: 10 * 60 * 1000,
+  max: 10,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: {
+    ok: false,
+    error: "RATE_LIMIT",
+    message: "Too many requests. Try again later.",
+  },
+});
+
+/* =========================
+   Health Check (AWS uses this)
+========================= */
+
 app.get("/health", (_req, res) => {
-    res.json({
-        ok: true,
-        service: "portfolio-backend",
-        timestamp: new Date().toISOString(),
-    });
+  res.status(200).json({
+    ok: true,
+    service: "portfolio-backend",
+    timestamp: new Date().toISOString(),
+  });
 });
 
-// 
+/* =========================
+   Contact Endpoint
+========================= */
 
-// Start Server
-app.listen(PORT, () => {
-    console.log(`✅ Success: Backend running on http://localhost:${PORT}`);
-});
-
-
-
-// Function: Post info from frontend to the Database
 app.post("/api/contact", contactLimiter, async (req, res) => {
-    // ✅ Allow CORS preflight
-    if (req.method === "OPTIONS") {
-        return res.sendStatus(204);
-    }
-    
-    try {
-        // Input variables
-        const { name, email, message, phone, phoneType, wantsReply, turnstileToken, company } = req.body;
+  try {
+    const {
+      name,
+      email,
+      message,
+      phone,
+      phoneType,
+      wantsReply,
+      turnstileToken,
+      company,
+    } = req.body;
 
-        // Honeypot (act like success)
-        if (company) return res.status(200).json({ ok: true });
+    // Honeypot (bots think they succeeded)
+    if (company) return res.status(200).json({ ok: true });
 
-        if (!name || !email || !message ) {
-            return res.status(400).json({ ok: false, error: "MISSING_FIELDS" });
-        }
-
-        // CAPTCHA check first before 7-day limit and accepting the message
-        if (!turnstileToken) {
-            return res.status(400).json({ ok: false, error: "CAPTCHA_REQUIRED"});
-        }
-
-        // Turnstile verify: using correct client IP 
-        const ip = 
-            (req.headers["cf-connecting-ip"] as string) ||
-            (req.headers["x-forwarded-for"] as string)?.split(",")[0]?.trim() ||
-            req.ip;
-
-        const result = await verifyTurnstile(turnstileToken, ip);
-
-        if (!result.success) {
-            return res.status(400).json({ 
-                ok: false,
-                error: "CAPTCHA_FAILED",
-                message:  "Captcha failed. Please try again.",
-            });
-        }
-
-        const normalizedEmail = String(email).toLowerCase().trim();
-
-        // ENFORCING " 1 Message per 7 days" check 
-
-        // 7 days, 24 Hours, 60 Minutes, 1000 millisec.
-        const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
-        
-        const since = new Date(Date.now() - SEVEN_DAYS_MS);
-
-        const recent = await Contact.findOne({
-            email: normalizedEmail,
-            createdAt: { $gte: since }, 
-        }).sort({ createdAt: -1 });
-
-        if (recent) {
-            const nextAllowedAt = new Date(recent.createdAt.getTime() + SEVEN_DAYS_MS);
-
-            return res.status(429).json({
-                ok: false,
-                error: "MESSAGE_LIMIT",
-                message: "You can only send one message every 7 days.",
-                nextAllowedAt: nextAllowedAt.toISOString(),
-            });
-        }
-
-
-        const doc = await Contact.create({
-            name,
-            email: normalizedEmail, 
-            message,
-            phone: phone || undefined,
-            phoneType: phoneType || undefined,
-            wantsReply: wantsReply === "yes" || wantsReply === true,
-        });
-
-        return res.status(201).json({ ok: true, id: doc._id });
-
-    } catch (err) {
-        console.error("❌ /api/contact error:", err);
-        return res.status(500).json({ ok: false, error: "SERVER_ERROR" });
+    if (!name || !email || !message) {
+      return res.status(400).json({ ok: false, error: "MISSING_FIELDS" });
     }
 
+    if (!turnstileToken) {
+      return res.status(400).json({
+        ok: false,
+        error: "CAPTCHA_REQUIRED",
+        message: "Captcha required.",
+      });
+    }
+
+    // Get client IP safely (Cloudflare / proxy / local)
+    const ip =
+      (req.headers["cf-connecting-ip"] as string) ||
+      (req.headers["x-forwarded-for"] as string)?.split(",")[0]?.trim() ||
+      req.ip;
+
+    const result = await verifyTurnstile(turnstileToken, ip);
+
+    if (!result.success) {
+      return res.status(400).json({
+        ok: false,
+        error: "CAPTCHA_FAILED",
+        message: "Captcha failed. Please try again.",
+      });
+    }
+
+    const normalizedEmail = String(email).toLowerCase().trim();
+
+    // Enforce 1 message per 7 days
+    const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
+    const since = new Date(Date.now() - SEVEN_DAYS_MS);
+
+    const recent = await Contact.findOne({
+      email: normalizedEmail,
+      createdAt: { $gte: since },
+    }).sort({ createdAt: -1 });
+
+    if (recent) {
+      const nextAllowedAt = new Date(
+        recent.createdAt.getTime() + SEVEN_DAYS_MS
+      );
+
+      return res.status(429).json({
+        ok: false,
+        error: "MESSAGE_LIMIT",
+        message: "You can only send one message every 7 days.",
+        nextAllowedAt: nextAllowedAt.toISOString(),
+      });
+    }
+
+    const doc = await Contact.create({
+      name,
+      email: normalizedEmail,
+      message,
+      phone: phone || undefined,
+      phoneType: phoneType || undefined,
+      wantsReply: wantsReply === "yes" || wantsReply === true,
+    });
+
+    return res.status(201).json({ ok: true, id: doc._id });
+  } catch (err) {
+    console.error("❌ /api/contact error:", err);
+    return res.status(500).json({ ok: false, error: "SERVER_ERROR" });
+  }
 });
+
+/* =========================
+   Start Server AFTER DB
+========================= */
+
+connectDB(MONGODB_URI)
+  .then(() => {
+    console.log("✅ Connected to MongoDB");
+    app.listen(PORT, () => {
+      console.log(`✅ Backend running on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.error("❌ MongoDB connection failed:", err);
+    process.exit(1);
+  });

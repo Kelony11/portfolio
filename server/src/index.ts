@@ -15,6 +15,17 @@ const app = express();
 const PORT = process.env.PORT ? Number(process.env.PORT) : 4000;
 const MONGODB_URI = process.env.MONGODB_URI || "";
 
+// Global limiter (light)
+
+const globalLimiter = rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 300, // per IP 15 min
+    standardHeaders: true,
+    legacyHeaders: false,
+});
+
+app.use(globalLimiter);
+
 // To avoid Spamming messages by the same user
 const contactLimiter = rateLimit({
     // 10 min timer
@@ -22,7 +33,7 @@ const contactLimiter = rateLimit({
     max: 10,     // 10 request per IP per 10 min
     standardHeaders: true,
     legacyHeaders: false,
-
+    message: { ok: false, error: "RATE_LIMIT", message: "Too many requests. Try again later." },
 });
 
 
@@ -40,7 +51,10 @@ app.use("/api/contact", contactLimiter);
 
 
 // Parse Json bodies
-app.use(express.json({ limit: "64kb" }));
+app.use(express.json({ limit: "50kb" }));
+
+// Add security heades (Helmet)
+app.use(helmet());
 
 // Allow multiple dev ports + optional env var
 const allowedOrigins = [
@@ -93,7 +107,7 @@ app.listen(PORT, () => {
 
 
 // Function: Post info from frontend to the Database
-app.post("/api/contact", async (req, res) => {
+app.post("/api/contact", contactLimiter, async (req, res) => {
     // ✅ Allow CORS preflight
     if (req.method === "OPTIONS") {
         return res.sendStatus(204);

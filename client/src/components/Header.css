@@ -108,14 +108,23 @@
 }
 
 .profile-name {
-  font-size: 1.5rem;
+  font-size: 2.3rem;
   font-weight: 700;
   margin: 0;
-  color: #ffffff;
+  background: linear-gradient(135deg, #7c3aed, #a855f7, #c084fc);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 3s ease infinite;
 }
 
 .app.light .profile-name {
-  color: #000000;
+  background: linear-gradient(135deg, #5b21b6, #7c3aed, #a855f7);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .app.mobile .profile-name {

@@ -9,6 +9,7 @@ body, html {
   height: 100%;
   overflow: hidden; /* NO SCROLLING ON MAIN PAGE */
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: #000000;
 }
 
 #root {

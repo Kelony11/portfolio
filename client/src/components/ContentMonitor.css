@@ -55,6 +55,11 @@
   padding-bottom: 7rem;
 }
 
+.section-content {
+  min-height: auto;
+  padding-bottom: 0;
+}
+
 /* Custom scrollbar styling */
 .scrollable-area::-webkit-scrollbar {
   width: 12px;

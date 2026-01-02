@@ -270,10 +270,7 @@ const ProjectsContent = () => {
         {filteredProjects.map((project, index) => (
           <div key={index} className="project-card">
             <div className="project-header">
-              <div className="project-icon">
-                <img src="/api/placeholder/80/80" alt={project.title} />
-              </div>
-              <h3>{project.title}</h3>
+              <h1>{project.title}</h1>
             </div>
 
             <p className="project-description">{project.description}</p>

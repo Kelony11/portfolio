@@ -259,13 +259,13 @@
   object-fit: cover;
 }
 
-.project-header h3 {
+.project-header h1 {
   margin: 0;
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   color: #7c3aed;
 }
 
-.app.light .project-header h3 {
+.app.light .project-header h1 {
   color: #5b21b6;
 }
 

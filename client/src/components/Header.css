@@ -16,6 +16,10 @@
   margin-bottom: 1rem;
   width: 100%;
   justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1rem;
 }
 
 .profile-picture {
@@ -26,6 +30,11 @@
   border: 3px solid #7c3aed;
   box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
   flex-shrink: 0;
+}
+
+.app.mobile .profile-picture {
+  width: 80px;
+  height: 80px;
 }
 
 .profile-picture img {
@@ -52,10 +61,9 @@
   z-index: 10;
 }
 
-.header.mobile .theme-toggle {
-  position: relative;
-  top: 0;
-  right: 0;
+.app.mobile .theme-toggle {
+  top: 1rem;
+  right: 1rem;
 }
 
 .theme-toggle:hover {
@@ -83,4 +91,100 @@
 
 .app.light .profile-picture {
   border-color: #5b21b6;
+}
+
+/* Profile Info */
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.app.mobile .profile-info {
+  text-align: center;
+  width: 100%;
+  max-width: calc(100% - 2rem);
+}
+
+.profile-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  color: #ffffff;
+}
+
+.app.light .profile-name {
+  color: #000000;
+}
+
+.app.mobile .profile-name {
+  font-size: 1.3rem;
+}
+
+/* Typing Animation Subtitle with Gradient */
+.profile-subtitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+  background: linear-gradient(135deg, #7c3aed, #a855f7, #c084fc);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 3s ease infinite;
+  min-height: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.app.mobile .profile-subtitle {
+  font-size: 0.85rem;
+  justify-content: center;
+  text-align: center;
+  flex-wrap: wrap;
+}
+
+.app.light .profile-subtitle {
+  background: linear-gradient(135deg, #5b21b6, #7c3aed, #a855f7);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Blinking Cursor */
+.cursor {
+  margin-left: 2px;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: blink 1s step-end infinite;
+}
+
+.app.light .cursor {
+  background: linear-gradient(135deg, #5b21b6, #7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
 }

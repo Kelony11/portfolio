@@ -44,23 +44,35 @@ app.use(express.json({ limit: "64kb" }));
 
 // Allow multiple dev ports + optional env var
 const allowedOrigins = [
-  "http://localhost:5173",
-  "http://localhost:5174",
-  process.env.CLIENT_URL, // optional
-].filter((origin): origin is string => Boolean(origin));
+  "http://localhost:5173", // Vite dev server
+  "http://127.0.0.1:5173",
+];
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin) return callback(null, true); // Postman/curl
+      // allow server-to-server & tools like curl/Postman
+      if (!origin) return callback(null, true);
 
-      if (allowedOrigins.includes(origin)) return callback(null, true);
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
 
-      return callback(new Error(`❌ CORS blocked: ${origin}`));
+      return callback(new Error("Not allowed by CORS"));
     },
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "OPTIONS"],
+    credentials: true,
   })
 );
+
+// IMPORTANT: Allow preflight requests
+app.use(cors({
+  origin: ["http://localhost:5173"],
+  methods: ["GET","POST","PUT","DELETE"],
+  credentials: true,
+}));
+
+
 
 // Health check
 app.get("/health", (_req, res) => {
@@ -82,6 +94,10 @@ app.listen(PORT, () => {
 
 // Function: Post info from frontend to the Database
 app.post("/api/contact", async (req, res) => {
+    // ✅ Allow CORS preflight
+    if (req.method === "OPTIONS") {
+        return res.sendStatus(204);
+    }
     
     try {
         // Input variables

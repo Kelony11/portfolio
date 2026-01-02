@@ -10,8 +10,8 @@ interface HeaderProps {
 
 const Header = ({ viewMode }: HeaderProps) => {
   const roles = [
-    "Software Developer Intern @ J&J",
-    "Masters in Software Engineering @ Rutgers"
+    "Ex-Software Dev. Intern @ J&J",
+    "Masters in Software Engineering"
   ];
 
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
@@ -58,7 +58,7 @@ const Header = ({ viewMode }: HeaderProps) => {
         />
       </div>
       <div className="profile-info">
-        <h1 className="profile-name">First Last</h1>
+        <h1 className="profile-name">Kelvin Ihezue</h1>
         <p className="profile-subtitle">
           {displayedText}
           <span className="cursor">|</span>

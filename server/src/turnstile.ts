@@ -1,23 +1,40 @@
 import axios from "axios";
 
-// Creating a Turnstile verification helper
+type TurnstileResponse = {
+  success: boolean;
+  "error-codes"?: string[];
+  messages?: string[];
+};
 
-export async function verifyTurnstile(token: string, remoteip?: string) {
-    const secret = process.env.TURNSTILE_SECRET_KEY;
+export async function verifyTurnstile(token: string, ip?: string) {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
 
-    if (!secret) throw new Error("Missing TURNSTILE_SECRET_KEY");
+  if (!secret) {
+    console.error("❌ TURNSTILE_SECRET_KEY is missing");
+    return { success: false };
+  }
 
-    const body = new URLSearchParams();
+  const data = new URLSearchParams({
+    secret,
+    response: token,
+  });
 
-    body.append("secret", secret);
-    body.append("response", token);
+  if (ip) data.append("remoteip", ip);
 
-    if (remoteip) body.append("remoteip", remoteip);
-
-    const resp = await axios.post(
-        "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-        body
+  try {
+    const resp = await axios.post<TurnstileResponse>(
+      "https://challenges.cloudflare.com/turnstile/v0/siteverify",
+      data.toString(),
+      {
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        // ✅ KEY FIX: do NOT throw on 400
+        validateStatus: () => true,
+      }
     );
 
-    return resp.data as { success: boolean; ["error-codes"]?: string[] };
+    return resp.data; // { success:false, error-codes:[...] } is fine
+  } catch (err) {
+    console.error("❌ Turnstile request failed:", err);
+    return { success: false };
+  }
 }

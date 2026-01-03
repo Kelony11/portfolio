@@ -75,10 +75,15 @@ const contactLimiter = rateLimit({
    Health Check (AWS uses this)
 ========================= */
 
+app.get("/", (_req, res) => {
+  res.status(200).send("OK");
+});
+
 app.get("/health", (_req, res) => {
   res.status(200).json({
     ok: true,
     service: "portfolio-backend",
+    status: "up",
     timestamp: new Date().toISOString(),
   });
 });

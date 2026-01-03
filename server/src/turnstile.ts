@@ -1,40 +1,48 @@
 import axios from "axios";
 
-type TurnstileResponse = {
+type TurnstileResult = {
   success: boolean;
-  "error-codes"?: string[];
-  messages?: string[];
+  errorCodes?: string[];
 };
 
-export async function verifyTurnstile(token: string, ip?: string) {
+export async function verifyTurnstile(
+  token: string,
+  remoteip?: string
+): Promise<TurnstileResult> {
   const secret = process.env.TURNSTILE_SECRET_KEY;
 
   if (!secret) {
     console.error("❌ TURNSTILE_SECRET_KEY is missing");
-    return { success: false };
+    return { success: false, errorCodes: ["missing-secret"] };
   }
 
-  const data = new URLSearchParams({
-    secret,
-    response: token,
-  });
-
-  if (ip) data.append("remoteip", ip);
-
   try {
-    const resp = await axios.post<TurnstileResponse>(
+    const body = new URLSearchParams({
+      secret,
+      response: token,
+    });
+
+    if (remoteip) {
+      body.append("remoteip", remoteip);
+    }
+
+    const response = await axios.post(
       "https://challenges.cloudflare.com/turnstile/v0/siteverify",
-      data.toString(),
+      body.toString(),
       {
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        // ✅ KEY FIX: do NOT throw on 400
-        validateStatus: () => true,
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        timeout: 5000, // prevents EB from hanging → 500 errors
       }
     );
 
-    return resp.data; // { success:false, error-codes:[...] } is fine
-  } catch (err) {
-    console.error("❌ Turnstile request failed:", err);
-    return { success: false };
+    return {
+      success: Boolean(response.data?.success),
+      errorCodes: response.data?.["error-codes"],
+    };
+  } catch (err: any) {
+    console.error("❌ Turnstile verification failed:", err.message);
+    return { success: false, errorCodes: ["request-failed"] };
   }
 }

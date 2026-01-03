@@ -104,6 +104,7 @@ app.post("/api/contact", contactLimiter, async (req, res) => {
       turnstileToken,
       company,
     } = req.body;
+    
 
     // Honeypot (bots think they succeeded)
     if (company) return res.status(200).json({ ok: true });
@@ -125,6 +126,7 @@ app.post("/api/contact", contactLimiter, async (req, res) => {
       (req.headers["cf-connecting-ip"] as string) ||
       (req.headers["x-forwarded-for"] as string)?.split(",")[0]?.trim() ||
       req.ip;
+
 
     const result = await verifyTurnstile(turnstileToken, ip);
 

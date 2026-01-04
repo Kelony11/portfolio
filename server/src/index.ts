@@ -12,30 +12,38 @@ dotenv.config();
 
 const app = express();
 // const PORT = process.env.PORT ? Number(process.env.PORT) : 4000;
-const PORT = process.env.PORT || 8080; // Testing purposes
+const PORT = Number(process.env.PORT) || 8080;
 const MONGODB_URI = process.env.MONGODB_URI || "";
 
 /* =========================
    CORS (Put BEFORE helmet!)
 ========================= */
 
-const allowedOrigins = [
+const allowedOrigins = new Set([
   "http://localhost:5173",
   "http://127.0.0.1:5173",
   "http://10.0.0.31:5173",
   "http://172.16.1.153:5173",
   "https://kelvinihezue.com",
   "https://www.kelvinihezue.com",
-];
+]);
 
-app.use(cors({
-  origin: allowedOrigins,
+app.set("trust proxy", 1);
+
+const corsOptions: cors.CorsOptions = {
+  origin: (origin, cb) => {
+    // allow server-to-server / curl (no origin)
+    if (!origin) return cb(null, true);
+    if (allowedOrigins.has(origin)) return cb(null, true);
+    return cb(new Error(`CORS blocked: ${origin}`));
+  },
+  credentials: true,
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type"],
-  credentials: true,
-}));
+};
 
-// app.options("*", cors());
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 /* =========================
    Security & Parsing

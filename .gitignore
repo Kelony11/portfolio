@@ -26,3 +26,8 @@ server-eb.zip
 
 # EC2 Key pair
 eb-portfolio-key.pem
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

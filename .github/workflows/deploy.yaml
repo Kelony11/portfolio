@@ -80,10 +80,10 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH }}
           script: |
-            cd /var/www/kelvin-portfolio/server
+            cd /var/www/kelvin-portfolio/server/server
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
             export PATH="$PATH:$HOME/.nvm/versions/node/v22.14.0/bin"
-            pnpm i
+            npm i
             pm2 reload pm2.config.js

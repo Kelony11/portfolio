@@ -30,10 +30,12 @@ app.use(express.json({ limit: "50kb" }));
 
 // Use env vars for production, fallback for dev/mobile testing
 const allowedOrigins = [
-  process.env.CLIENT_URL,           // prod frontend domain
-  "http://localhost:5173",           // laptop dev
+  "http://localhost:5173",
   "http://127.0.0.1:5173",
-  "http://10.0.0.31:5173",           // mobile testing (LAN)
+  "http://10.0.0.31:5173",
+  "http://172.16.1.153:5173",
+  "https://kelvinihezue.com",
+  "https://www.kelvinihezue.com",  // if you use www
 ].filter((o): o is string => Boolean(o));
 
 const corsOptions: cors.CorsOptions = {

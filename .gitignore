@@ -14,7 +14,7 @@ pnpm-debug.log*
 .DS_Store
 
 # builds
-dist/
+client/dist/
 build/
 coverage/
 

@@ -98,7 +98,7 @@ app.post("/api/contact", contactLimiter, async (req, res) => {
       turnstileToken,
       company,
     } = req.body;
-    
+
 
     // Honeypot (bots think they succeeded)
     if (company) return res.status(200).json({ ok: true });

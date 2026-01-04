@@ -15,47 +15,39 @@ const PORT = process.env.PORT ? Number(process.env.PORT) : 4000;
 const MONGODB_URI = process.env.MONGODB_URI || "";
 
 /* =========================
-   Security & Parsing
+   CORS (Put BEFORE helmet!)
 ========================= */
 
-// Security headers (keep once)
-app.use(helmet());
-
-// Parse JSON with size limit (safe for contact forms)
-app.use(express.json({ limit: "50kb" }));
-
-/* =========================
-   CORS (AWS-READY)
-========================= */
-
-// Use env vars for production, fallback for dev/mobile testing
 const allowedOrigins = [
   "http://localhost:5173",
   "http://127.0.0.1:5173",
   "http://10.0.0.31:5173",
   "http://172.16.1.153:5173",
   "https://kelvinihezue.com",
-  "https://www.kelvinihezue.com",  // if you use www
-].filter((o): o is string => Boolean(o));
+  "https://www.kelvinihezue.com",
+];
 
-const corsOptions: cors.CorsOptions = {
-  origin: (origin, callback) => {
-    // Allow Postman / curl / server-to-server
-    if (!origin) return callback(null, true);
-
-    if (allowedOrigins.includes(origin)) {
-      return callback(null, true);
-    }
-
-    return callback(new Error(`Not allowed by CORS: ${origin}`));
-  },
+app.use(cors({
+  origin: allowedOrigins,
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type"],
   credentials: true,
-};
+}));
 
-app.use(cors(corsOptions));
-// app.options("/*", cors(corsOptions)); // ✅ REQUIRED for browser preflight stability
+// app.options("*", cors());
+
+/* =========================
+   Security & Parsing
+========================= */
+
+// Security headers - configure helmet to not interfere with CORS
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" },
+  crossOriginEmbedderPolicy: false,
+}));
+
+// Parse JSON with size limit (safe for contact forms)
+app.use(express.json({ limit: "50kb" }));
 
 /* =========================
    Rate limiting (contact only)

@@ -26,6 +26,12 @@ jobs:
           PROD_ENV: ${{ secrets.SERVER_ENV }}
         run: |
           echo "$PROD_ENV" > server/.env
+      # Step 3: Create .env file
+      - name: 🔨 Create .env file
+        env:
+          PROD_ENV: ${{ secrets.CLIENT_ENV }}
+        run: |
+          echo "$PROD_ENV" > client/.env
 
       # Step 4: Install dependencies
       - name: Install dependencies
@@ -53,7 +59,7 @@ jobs:
             server/server.js,
             server/tsconfig.json,
             server/upload
-          target: "/var/www/kevin-portfolio"
+          target: "/var/www/kelvin-portfolio/server"
 
       # Step 6: Copy frontend files to server root
       - name: 🚀 Sync Frontend using Rsync
@@ -61,7 +67,7 @@ jobs:
         with:
           switches: -avz --delete
           path: client/dist/
-          remote_path: /var/www/kevin-portfolio
+          remote_path: /var/www/kelvin-portfolio/client
           remote_host: ${{ secrets.HOST }}
           remote_user: ${{ secrets.USER }}
           remote_key: ${{ secrets.SSH }}
@@ -74,7 +80,7 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH }}
           script: |
-            cd /home/raisedly-api/htdocs/api.raisedly.com/server
+            cd /var/www/kelvin-portfolio/server
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"

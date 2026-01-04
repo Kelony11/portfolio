@@ -1,0 +1,83 @@
+name: Portfolio CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout code
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Step 2: Setup Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "22.14.0"
+
+      # Step 3: Create .env file
+      - name: 🔨 Create .env file
+        env:
+          PROD_ENV: ${{ secrets.SERVER_ENV }}
+        run: |
+          echo "$PROD_ENV" > server/.env
+
+      # Step 4: Install dependencies
+      - name: Install dependencies
+        run: |
+          cd client && npm i && npm run build
+          cd ../server && npm i && npm run build
+
+      # Step 5: Copy backend files to server root
+      - name: 🚀 Upload Backend to Server
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH }}
+          port: 22
+          overwrite: true
+          source: |
+            server/.env,
+            server/.gitignore,
+            server/dist,
+            server/docs,
+            server/package.json,
+            server/pm2.config.js,
+            server/package-lock.json,
+            server/server.js,
+            server/tsconfig.json,
+            server/upload
+          target: "/var/www/kevin-portfolio"
+
+      # Step 6: Copy frontend files to server root
+      - name: 🚀 Sync Frontend using Rsync
+        uses: burnett01/rsync-deployments@7.0.1
+        with:
+          switches: -avz --delete
+          path: client/dist/
+          remote_path: /var/www/kevin-portfolio
+          remote_host: ${{ secrets.HOST }}
+          remote_user: ${{ secrets.USER }}
+          remote_key: ${{ secrets.SSH }}
+
+      # Step 7: Restart server via SSH
+      - name: 🔁 Restart API Server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH }}
+          script: |
+            cd /home/raisedly-api/htdocs/api.raisedly.com/server
+            export NVM_DIR="$HOME/.nvm"
+            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+            [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+            export PATH="$PATH:$HOME/.nvm/versions/node/v22.14.0/bin"
+            pnpm i
+            pm2 reload pm2.config.js

@@ -95,7 +95,9 @@ app.get("/health", (_req, res) => {
    Contact Endpoint
 ========================= */
 
+
 app.post("/api/contact", contactLimiter, async (req, res) => {
+
   try {
     const {
       name,
@@ -108,6 +110,9 @@ app.post("/api/contact", contactLimiter, async (req, res) => {
       company,
     } = req.body;
 
+    // if (process.env.NODE_ENV){ 
+
+    // }
 
     // Honeypot (bots think they succeeded)
     if (company) return res.status(200).json({ ok: true });

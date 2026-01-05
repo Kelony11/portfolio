@@ -24,8 +24,9 @@ coverage/
 # backend zip aws eb
 server-eb.zip
 
-# EC2 Key pair
+# EC2 Key pair  & Permission key
 eb-portfolio-key.pem
+moon.pem
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

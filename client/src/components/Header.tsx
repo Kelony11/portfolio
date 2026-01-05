@@ -8,11 +8,12 @@ interface HeaderProps {
   toggleTheme: () => void;
 }
 
+const roles = [
+  "Ex-Software Dev. Intern @ J&J",
+  "Masters in Software Engineering"
+];
+
 const Header = ({ viewMode }: HeaderProps) => {
-  const roles = [
-    "Ex-Software Dev. Intern @ J&J",
-    "Masters in Software Engineering"
-  ];
 
   const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");

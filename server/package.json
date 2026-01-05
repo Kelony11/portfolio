@@ -20,8 +20,8 @@
     "helmet": "^8.1.0",
     "mongodb": "^7.0.0",
     "mongoose": "^9.1.0",
-    "zod": "^4.3.4",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "zod": "^4.3.4"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",

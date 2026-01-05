@@ -106,3 +106,26 @@
 .project-links {
   margin-top: 0;
 }
+
+@media (max-width: 1200px) {
+  .section-buttons {
+    position: relative !important;
+    bottom: auto !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    transform: none !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 1rem;
+    margin: 0rem auto 1.5rem auto;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .section-buttons button {
+    flex: 0 1 auto;
+    min-width: 120px;
+  }
+}

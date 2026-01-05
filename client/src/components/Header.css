@@ -197,3 +197,59 @@
     opacity: 0;
   }
 }
+
+/* Tablet and below - Center header */
+@media (max-width: 1200px) {
+  .header {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+    margin-bottom: 0;
+  }
+
+  .profile-info {
+    text-align: center;
+    width: 100%;
+  }
+
+  .profile-subtitle {
+    justify-content: center;
+  }
+}
+
+/* Mobile: Smaller sizes */
+@media (max-width: 768px) {
+  .profile-picture {
+    width: 100px;
+    height: 100px;
+  }
+
+  .profile-name {
+    font-size: 1.75rem;
+  }
+
+  .profile-subtitle {
+    font-size: 0.95rem;
+  }
+}
+
+/* Very small mobile */
+@media (max-width: 480px) {
+  .profile-picture {
+    width: 80px;
+    height: 80px;
+  }
+
+  .profile-name {
+    font-size: 1.5rem;
+  }
+
+  .profile-subtitle {
+    font-size: 0.85rem;
+  }
+}

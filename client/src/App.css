@@ -218,3 +218,51 @@ p {
     transform: rotate(360deg);
   }
 }
+
+/* Desktop - Default layout */
+@media (min-width: 1201px) {
+  .app > *:not(.theme-toggle):not(.floating-resume) {
+  }
+}
+
+/* Tablet and Mobile: Stack Header + Buttons at top */
+@media (max-width: 1200px) {
+  .app {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Header and buttons container: Stack at top */
+  .app > header,
+  .app > .section-buttons {
+    position: relative;
+    width: 100%;
+    left: auto;
+    top: auto;
+  }
+
+  /* Header comes first */
+  .app > header {
+    order: 1;
+    margin-bottom: 1rem;
+  }
+
+  /* Buttons come second */
+  .app > .section-buttons {
+    order: 2;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Content comes third */
+  .app > .content-monitor {
+    order: 3;
+    width: 100%;
+    padding: 0 1rem;
+  }
+
+  /* Theme toggle and resume stay fixed */
+  .theme-toggle,
+  .floating-resume {
+    position: fixed;
+  }
+}

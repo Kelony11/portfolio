@@ -1,6 +1,9 @@
 /* Common Section Styles */
 .section-content {
   animation: fadeIn 0.5s ease;
+  max-width: 100%;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 /* Hide the honeypot bot trap */
@@ -586,6 +589,31 @@
 }
 
 /* Responsive adjustments */
+@media (max-width: 1200px) {
+  /* Center profile and navigation */
+  .app-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .profile-section {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-info {
+    text-align: center;
+  }
+
+  .nav-buttons {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}
+
 @media (max-width: 768px) {
   .projects-grid {
     grid-template-columns: 1fr;
@@ -593,6 +621,11 @@
 
   .skills-grid {
     grid-template-columns: 1fr;
+  }
+
+  .skill-card {
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .timeline {
@@ -690,6 +723,18 @@
 
   .app.light .filter-done-btn {
     background: linear-gradient(135deg, #5b21b6, #7c3aed);
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) {
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1201px) {
+  .skills-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 }
 

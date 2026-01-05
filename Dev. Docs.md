@@ -1,7 +1,4 @@
 # Documentation
-Summary: This part is meant for developers to take note of bugs on this website. 
-
-# 🐞 BUGS TO FIX LATER
 
 A running list of known issues and bugs organized by system area.
 

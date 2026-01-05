@@ -19,7 +19,7 @@ const MONGODB_URI = process.env.MONGODB_URI || "";
    CORS (Put BEFORE helmet!)
 ========================= */
 
-const allowedOrigins = new Set([
+const allowedOrigins = [
   "http://localhost:5173",
   "http://127.0.0.1:5173",
   "http://10.0.0.31:5173",
@@ -27,23 +27,25 @@ const allowedOrigins = new Set([
   "https://kelvinihezue.com",
   "https://www.kelvinihezue.com",
   "http://localhost:5173/"
-]);
+];
 
 app.set("trust proxy", 1);
 
-const corsOptions: cors.CorsOptions = {
-  origin: (origin, cb) => {
-    // allow server-to-server / curl (no origin)
-    if (!origin) return cb(null, true);
-    if (allowedOrigins.has(origin)) return cb(null, true);
-    return cb(new Error(`CORS blocked: ${origin}`));
-  },
+// const corsOptions: cors.CorsOptions = {
+//   origin: (origin, cb) => {
+//     // allow server-to-server / curl (no origin)
+//     if (!origin) return cb(null, true);
+//     if (allowedOrigins.has(origin)) return cb(null, true);
+//     return cb(new Error(`CORS blocked: ${origin}`));
+//   },
+//   credentials: true,
+// };
+
+// app.use(cors(corsOptions));
+app.use(cors({
+  origin: '*',
   credentials: true,
-};
-
-app.use(cors(corsOptions));
-// app.options("*", cors(corsOptions));
-
+})); // Allow all origins for testing
 /* =========================
    Security & Parsing
 ========================= */

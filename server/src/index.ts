@@ -26,6 +26,7 @@ const allowedOrigins = new Set([
   "http://172.16.1.153:5173",
   "https://kelvinihezue.com",
   "https://www.kelvinihezue.com",
+  "http://localhost:5173/"
 ]);
 
 app.set("trust proxy", 1);
@@ -38,8 +39,6 @@ const corsOptions: cors.CorsOptions = {
     return cb(new Error(`CORS blocked: ${origin}`));
   },
   credentials: true,
-  methods: ["GET", "POST", "OPTIONS"],
-  allowedHeaders: ["Content-Type"],
 };
 
 app.use(cors(corsOptions));

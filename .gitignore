@@ -32,3 +32,6 @@ moon.pem
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+# Hide CI/CD Pipeline
+.github

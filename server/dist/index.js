@@ -13,26 +13,36 @@ const db_1 = require("./db");
 const ContactSchema_1 = require("./models/ContactSchema");
 dotenv_1.default.config();
 const app = (0, express_1.default)();
-const PORT = process.env.PORT ? Number(process.env.PORT) : 4000;
+// const PORT = process.env.PORT ? Number(process.env.PORT) : 4000;
+const PORT = Number(process.env.PORT) || 8080;
 const MONGODB_URI = process.env.MONGODB_URI || "";
 /* =========================
    CORS (Put BEFORE helmet!)
 ========================= */
-const allowedOrigins = [
+const allowedOrigins = new Set([
     "http://localhost:5173",
     "http://127.0.0.1:5173",
     "http://10.0.0.31:5173",
     "http://172.16.1.153:5173",
     "https://kelvinihezue.com",
     "https://www.kelvinihezue.com",
-];
-app.use((0, cors_1.default)({
-    origin: allowedOrigins,
+]);
+app.set("trust proxy", 1);
+const corsOptions = {
+    origin: (origin, cb) => {
+        // allow server-to-server / curl (no origin)
+        if (!origin)
+            return cb(null, true);
+        if (allowedOrigins.has(origin))
+            return cb(null, true);
+        return cb(new Error(`CORS blocked: ${origin}`));
+    },
+    credentials: true,
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: ["Content-Type"],
-    credentials: true,
-}));
-// app.options("*", cors());
+};
+app.use((0, cors_1.default)(corsOptions));
+// app.options("*", cors(corsOptions));
 /* =========================
    Security & Parsing
 ========================= */
@@ -77,6 +87,8 @@ app.get("/health", (_req, res) => {
 app.post("/api/contact", contactLimiter, async (req, res) => {
     try {
         const { name, email, message, phone, phoneType, wantsReply, turnstileToken, company, } = req.body;
+        // if (process.env.NODE_ENV){ 
+        // }
         // Honeypot (bots think they succeeded)
         if (company)
             return res.status(200).json({ ok: true });

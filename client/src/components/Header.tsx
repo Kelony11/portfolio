@@ -59,7 +59,7 @@ const Header = ({ viewMode }: HeaderProps) => {
         />
       </div>
       <div className="profile-info">
-        <h1 className="profile-name">Kelvin Ihezue</h1>
+        <h1 className="profile-name">Kelvin Ihezue Test</h1>
         <p className="profile-subtitle">
           {displayedText}
           <span className="cursor">|</span>

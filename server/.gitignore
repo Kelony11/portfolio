@@ -3,3 +3,9 @@
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+
+# Hide env files
+.env
+.env.*
+.env.local

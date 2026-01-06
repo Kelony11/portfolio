@@ -21,4 +21,6 @@ A running list of known issues and bugs caught by real users of this website.
 ## 🧪 Suggestions / Future Improvements
 - [ ] Improve error handling for bad user inputs
 - [ ] Add loading indicators for slow API responses
-- [ ] Add a feature for real users/visitors to report bugs caught while using the website 💡
+- [ ] Add a "Submit Feedback" button for real users to report bugs. The button should open up two things:
+    1. 3 options in a dropdown menu -> Report a bug 🐞, Suggest a Feature 💡, General Feedback/Comments 💡
+    2. A note/Message entry box to type their report/feaure/comments.

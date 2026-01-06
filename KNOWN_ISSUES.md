@@ -21,3 +21,4 @@ A running list of known issues and bugs caught by real users of this website.
 ## 🧪 Suggestions / Future Improvements
 - [ ] Improve error handling for bad user inputs
 - [ ] Add loading indicators for slow API responses
+- [ ] Add a feature for real users/visitors to report bugs caught while using the website

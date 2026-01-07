@@ -86,4 +86,4 @@ jobs:
             [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
             export PATH="$PATH:$HOME/.nvm/versions/node/v22.14.0/bin"
             npm i
-            pm2 reload pm2.config.js
+            pm2 reload all

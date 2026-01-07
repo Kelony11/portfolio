@@ -31,17 +31,7 @@ const allowedOrigins = [
 
 app.set("trust proxy", 1);
 
-// const corsOptions: cors.CorsOptions = {
-//   origin: (origin, cb) => {
-//     // allow server-to-server / curl (no origin)
-//     if (!origin) return cb(null, true);
-//     if (allowedOrigins.has(origin)) return cb(null, true);
-//     return cb(new Error(`CORS blocked: ${origin}`));
-//   },
-//   credentials: true,
-// };
 
-// app.use(cors(corsOptions));
 app.use(cors({
   origin: '*',
   credentials: true,

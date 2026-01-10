@@ -255,8 +255,13 @@
   color: #ffffff;
 }
 
+.app.mobile .required {
+  color: #ef4444;
+}
+
 /* Mobile adjustments */
 @media (max-width: 768px) {
+  
   .resume-modal {
     padding: 0.5rem;
   }

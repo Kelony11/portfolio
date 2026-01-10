@@ -4,6 +4,7 @@ import Header from './components/Header';
 import SectionButtons from './components/SectionButtons';
 import ContentMonitor from './components/ContentMonitor';
 import FloatingResume from './components/FloatingResume';
+import FloatingFeedback from './components/FloatingFeedback';
 import useTheme from './hooks/useTheme';
 import type { Section, ViewMode } from './types';
 
@@ -13,7 +14,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const { theme, toggleTheme } = useTheme();
 
-  // Auto-detect mobile/desktop based on screen size
   // Auto-detect mobile/desktop based on screen size
   useEffect(() => {
     const handleResize = () => {
@@ -29,7 +29,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    // Small delay to ensure smooth transition
+    // Small delay for transition when refreshing page
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 100);
@@ -90,6 +90,7 @@ function App() {
       />
       
       <FloatingResume />
+      <FloatingFeedback />
     </div>
   );
 }

@@ -1,0 +1,259 @@
+.floating-feedback {
+  position: fixed;
+  top: 50%;
+  right: 2rem;
+  transform: translateY(-50%);
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 100;
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.4);
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(-50%);
+  }
+  50% {
+    transform: translateY(calc(-50% - 10px));
+  }
+}
+
+.floating-feedback:hover {
+  transform: translateY(-50%) scale(1.1);
+  box-shadow: 0 12px 32px rgba(124, 58, 237, 0.6);
+  animation: none;
+}
+
+.floating-feedback:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.feedback-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feedback-icon svg {
+  color: #ffffff;
+  width: 28px;
+  height: 28px;
+}
+
+.feedback-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Light theme */
+.app.light .floating-feedback {
+  border-color: #000000;
+  box-shadow: 0 8px 24px rgba(91, 33, 182, 0.4);
+}
+
+.app.light .floating-feedback:hover {
+  box-shadow: 0 12px 32px rgba(91, 33, 182, 0.6);
+}
+
+/* Hide on mobile */
+@media (max-width: 1200px) {
+  .floating-feedback {
+    display: none;
+  }
+}
+
+/* Modal Styles - NO CLICK OUTSIDE TO CLOSE */
+.feedback-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.feedback-viewer {
+  background: #1a1a1a;
+  border: 2px solid #7c3aed;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.app.light .feedback-viewer {
+  background: #ffffff;
+  border-color: #5b21b6;
+}
+
+.feedback-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 2px solid #7c3aed;
+}
+
+.app.light .feedback-header {
+  border-bottom-color: #5b21b6;
+}
+
+.feedback-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #7c3aed;
+}
+
+.app.light .feedback-header h3 {
+  color: #5b21b6;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border-radius: 4px;
+}
+
+.close-btn:hover {
+  background: rgba(124, 58, 237, 0.2);
+  transform: scale(1.1);
+}
+
+/* Form Styles */
+.feedback-form {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.feedback-form .form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.feedback-form label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.feedback-form select,
+.feedback-form textarea {
+  padding: 0.75rem;
+  border: 2px solid #7c3aed;
+  border-radius: 8px;
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.feedback-form select:focus,
+.feedback-form textarea:focus {
+  outline: none;
+  border-color: #a855f7;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+}
+
+.feedback-form select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%237c3aed' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2.5rem;
+}
+
+.app.light .feedback-form select {
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='%235b21b6' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+.feedback-form textarea {
+  resize: vertical;
+  min-height: 150px;
+}
+
+.feedback-form .error {
+  border-color: #ef4444;
+}
+
+.feedback-form .error-message {
+  color: #ef4444;
+  font-size: 0.875rem;
+}
+
+.feedback-form .submit-btn {
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.feedback-form .submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(124, 58, 237, 0.4);
+}
+
+.feedback-form .submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.app.light .feedback-form .submit-btn {
+  background: linear-gradient(135deg, #5b21b6, #7c3aed);
+}
+
+/* Success Message */
+.feedback-success {
+  padding: 3rem 1.5rem;
+  text-align: center;
+}
+
+.feedback-success .success-icon {
+  margin-bottom: 1rem;
+}
+
+.feedback-success .success-icon svg {
+  color: #10b981;
+}
+
+.feedback-success p {
+  font-size: 1.2rem;
+  font-weight: 600;
+}

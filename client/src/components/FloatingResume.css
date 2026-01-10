@@ -39,14 +39,14 @@
 
 .app.mobile .floating-resume {
   position: fixed;
-  top: 8rem;
+  top: 6rem;
   right: 1rem;
-  left: auto;
+  left: 85%;
   bottom: auto;
-  transform: none;
+  transform: translateX(-50%);
   width: 70px;
   height: 70px;
-  animation: float 3s ease-in-out infinite;
+  animation: float-mobile 3s ease-in-out infinite;
 }
 
 .floating-resume:hover {
@@ -56,16 +56,16 @@
 }
 
 .app.mobile .floating-resume:hover {
-  transform: scale(1.1);
+  transform: translateX(-50%) scale(1.1);
   animation: none;
 }
 
-.floating-resume:active {
+/* .floating-resume:active {
   transform: translateY(-50%) scale(0.95);
-}
+} */
 
 .app.mobile .floating-resume:active {
-  transform: scale(0.95);
+  transform: translateX(-50%) scale(0.95);
 }
 
 .resume-icon {

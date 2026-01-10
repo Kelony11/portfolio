@@ -1,7 +1,7 @@
 .floating-resume {
   position: fixed;
-  top: 9rem;
-  right: 2rem;
+  top: 5rem;
+  right: 10rem;
   width: 70px;
   height: 70px;
   border-radius: 50%;
@@ -21,10 +21,10 @@
 
 @keyframes float {
   0%, 100% {
-    transform: translateY(0px);
+    transform: translateY(-50%);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(calc(-50% - 10px));
   }
 }
 
@@ -50,22 +50,22 @@
 }
 
 .floating-resume:hover {
-  transform: scale(1.1) translateY(-5px);
+  transform: translateY(-50%) scale(1.1);
   box-shadow: 0 12px 32px rgba(124, 58, 237, 0.6);
   animation: none;
 }
 
 .app.mobile .floating-resume:hover {
-  transform: translate(-50%, -5px) scale(1.1);
+  transform: scale(1.1);
   animation: none;
 }
 
 .floating-resume:active {
-  transform: scale(0.95);
+  transform: translateY(-50%) scale(0.95);
 }
 
 .app.mobile .floating-resume:active {
-  transform: translateX(-50%) scale(0.95);
+  transform: scale(0.95);
 }
 
 .resume-icon {

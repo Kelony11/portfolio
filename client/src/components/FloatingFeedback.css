@@ -1,8 +1,7 @@
 .floating-feedback {
   position: fixed;
-  top: 50%;
-  right: 2rem;
-  transform: translateY(-50%);
+  top: 5rem;
+  right: 18rem;
   width: 70px;
   height: 70px;
   background: linear-gradient(135deg, #7c3aed, #a855f7);
@@ -19,7 +18,6 @@
   box-shadow: 0 8px 24px rgba(124, 58, 237, 0.4);
   animation: float 3s ease-in-out infinite;
 }
-
 @keyframes float {
   0%, 100% {
     transform: translateY(-50%);
@@ -88,7 +86,6 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  backdrop-filter: blur(4px);
 }
 
 .feedback-viewer {

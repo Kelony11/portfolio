@@ -37,6 +37,26 @@
   }
 }
 
+/* Tablet/Medium screens */
+@media (max-width: 1200px) and (min-width: 769px) {
+  .floating-resume {
+    top: 5rem;
+    left: 85%;
+    right: auto;
+    transform: translateX(-50%);
+    animation: float-mobile 3s ease-in-out infinite;
+  }
+
+  .floating-resume:hover {
+    transform: translateX(-50%) scale(1.1);
+    animation: none;
+  }
+
+  .floating-resume:active {
+    transform: translateX(-50%) scale(0.95);
+  }
+}
+
 .app.mobile .floating-resume {
   position: fixed;
   top: 6rem;

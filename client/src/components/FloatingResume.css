@@ -6,7 +6,7 @@
   height: 70px;
   border-radius: 50%;
   background: linear-gradient(135deg, #7c3aed, #a855f7);
-  border: 3px solid #ffffff;
+  border: none;
   box-shadow: 0 8px 24px rgba(124, 58, 237, 0.4);
   cursor: pointer;
   display: flex;

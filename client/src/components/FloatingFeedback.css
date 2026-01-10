@@ -5,7 +5,7 @@
   width: 70px;
   height: 70px;
   background: linear-gradient(135deg, #7c3aed, #a855f7);
-  border: 3px solid #ffffff;
+  border: none;
   border-radius: 50%;
   display: flex;
   flex-direction: column;
@@ -50,7 +50,7 @@
 }
 
 .feedback-label {
-  font-size: 0.65rem;
+  font-size: 0.55rem;
   font-weight: 700;
   color: #ffffff;
   text-transform: uppercase;

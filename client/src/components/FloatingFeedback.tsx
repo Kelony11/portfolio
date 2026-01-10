@@ -160,7 +160,7 @@ const FloatingFeedback = () => {
                     value={formData.message}
                     onChange={handleChange}
                     rows={6}
-                    placeholder="Tell us more..."
+                    placeholder="Describe your feedback..."
                     className={errors.message ? 'error' : ''}
                   />
                   {errors.message && (

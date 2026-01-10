@@ -67,13 +67,6 @@
   box-shadow: 0 12px 32px rgba(91, 33, 182, 0.6);
 }
 
-/* Hide on mobile */
-@media (max-width: 1200px) {
-  .floating-feedback {
-    display: none;
-  }
-}
-
 /* Modal Styles - NO CLICK OUTSIDE TO CLOSE */
 .feedback-modal {
   position: fixed;
@@ -253,4 +246,64 @@
 .feedback-success p {
   font-size: 1.2rem;
   font-weight: 600;
+}
+
+/* MOBILE SECTION */
+@media (max-width: 1200px) {
+  .floating-feedback {
+    top: 5rem;
+    left:15%;
+    right: auto;
+    transform: translateX(-50%);
+    animation: float-mobile 3s ease-in-out infinite;
+  }
+
+  .floating-feedback:hover {
+    transform: translateX(-50%) scale(1.1);
+    animation: none;
+  }
+
+  .floating-feedback:active {
+    transform: translateX(-50%) scale(0.95);
+  }
+}
+
+/* Mobile animation */
+@keyframes float-mobile {
+  0%, 100% {
+    transform: translate(-50%, 0px);
+  }
+  50% {
+    transform: translate(-50%, -10px);
+  }
+}
+
+/* Mobile/Tablet responsiveness */
+.app.mobile .floating-feedback {
+  position: fixed;
+  top: 6rem;
+  left: 15%;
+  right: auto;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 70px;
+  animation: float-mobile 3s ease-in-out infinite;
+}
+
+.app.mobile .floating-feedback:hover {
+  transform: translateX(-50%) scale(1.1);
+  animation: none;
+}
+
+.app.mobile .floating-feedback:active {
+  transform: translateX(-50%) scale(0.95);
+}
+
+.app.mobile .feedback-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.app.mobile .feedback-label {
+  font-size: 0.5rem;
 }

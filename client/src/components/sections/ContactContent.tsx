@@ -227,7 +227,7 @@ const ContactContent = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="phone">Phone (optional)</label>
+              <label htmlFor="phone">Phone</label>
               <input
                 type="tel"
                 id="phone"
@@ -239,7 +239,7 @@ const ContactContent = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="phoneType">Phone Type (optional)</label>
+              <label htmlFor="phoneType">Phone Type</label>
               <select id="phoneType" name="phoneType" value={formData.phoneType} onChange={handleChange}>
                 <option value="" hidden>
                   Select phone type

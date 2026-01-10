@@ -372,6 +372,10 @@
 }
 
 @media (max-width: 900px) {
+  .required {
+    color: #ef4444;
+  }
+
   .contact-grid {
     grid-template-columns: 1fr;
   }
@@ -594,6 +598,9 @@
 
 /* Responsive adjustments */
 @media (max-width: 1200px) {
+  .required {
+        color: #ef4444;
+    }
   /* Center profile and navigation */
   .app-header {
     flex-direction: column;
@@ -618,7 +625,15 @@
   }
 }
 
+.app.mobile .required {
+  color: #ef4444;
+}
+
 @media (max-width: 768px) {
+  .required {
+    color: #ef4444;
+  }
+
   .projects-grid {
     grid-template-columns: 1fr;
   }

@@ -157,6 +157,11 @@
   font-size: 0.95rem;
 }
 
+.feedback-form label::after {
+  content: ' *';
+  color: #ef4444;
+}
+
 .feedback-form select,
 .feedback-form textarea {
   padding: 0.75rem;

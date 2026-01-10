@@ -194,10 +194,12 @@ const ContactContent = () => {
               className="hidden"
               tabIndex={-1}
               autoComplete="off"
+              aria-hidden="true"
+              aria-label="Leave this field blank"
             />
 
             <div className="form-group">
-              <label htmlFor="name">Name (required)</label>
+              <label htmlFor="name">Name <span className="required">*</span></label>
               <input
                 type="text"
                 id="name"
@@ -211,7 +213,7 @@ const ContactContent = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="email">Email (required)</label>
+              <label htmlFor="email">Email <span className="required">*</span></label>
               <input
                 type="email"
                 id="email"
@@ -249,7 +251,7 @@ const ContactContent = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="message">Message (required)</label>
+              <label htmlFor="message">Message <span className="required">*</span></label>
               <textarea
                 id="message"
                 name="message"

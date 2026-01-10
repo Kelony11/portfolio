@@ -16,6 +16,10 @@
   opacity: 0;
 }
 
+.required {
+  color: #ef4444;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;

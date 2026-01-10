@@ -81,10 +81,10 @@ const FloatingFeedback = () => {
         handleClose();
       }, 2000);
       
-    } catch (err) {
-      setSubmitError('Failed to send feedback. Please try again.');
+    } catch {
+        setSubmitError('Failed to send feedback. Please try again.');
     } finally {
-      setIsSubmitting(false);
+        setIsSubmitting(false);
     }
   };
 
@@ -134,7 +134,7 @@ const FloatingFeedback = () => {
             ) : (
               <form onSubmit={handleSubmit} className="feedback-form">
                 <div className="form-group">
-                  <label htmlFor="feedbackType">Feedback Type *</label>
+                  <label htmlFor="feedbackType">Feedback Type</label>
                   <select
                     id="feedbackType"
                     name="feedbackType"
@@ -145,7 +145,7 @@ const FloatingFeedback = () => {
                     <option value="" disabled hidden>Select feedback type</option>
                     <option value="bug">Report a Bug</option>
                     <option value="feature">Suggest a Feature</option>
-                    <option value="general">General Feedback</option>
+                    <option value="general">Leave a Comment</option>
                   </select>
                   {errors.feedbackType && (
                     <span className="error-message">{errors.feedbackType}</span>
@@ -153,7 +153,7 @@ const FloatingFeedback = () => {
                 </div>
 
                 <div className="form-group">
-                  <label htmlFor="message">Your Feedback *</label>
+                  <label htmlFor="message">Your Feedback</label>
                   <textarea
                     id="message"
                     name="message"

@@ -6,11 +6,11 @@ const API_URL = import.meta.env.VITE_API_URL;
 const FloatingFeedback = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
-    feedbackType: '',
+    type: '',
     message: ''
   });
   const [errors, setErrors] = useState({
-    feedbackType: '',
+    type: '',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -25,8 +25,8 @@ const FloatingFeedback = () => {
     setIsOpen(false);
     setSubmitSuccess(false);
     setSubmitError(null);
-    setFormData({ feedbackType: '', message: '' });
-    setErrors({ feedbackType: '', message: '' });
+    setFormData({ type: '', message: '' });
+    setErrors({ type: '', message: '' });
   };
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -40,11 +40,11 @@ const FloatingFeedback = () => {
   };
 
   const validateForm = () => {
-    const newErrors = { feedbackType: '', message: '' };
+    const newErrors = { type: '', message: '' };
     let isValid = true;
 
-    if (!formData.feedbackType) {
-      newErrors.feedbackType = 'Please select a feedback type';
+    if (!formData.type) {
+      newErrors.type = 'Please select a feedback type';
       isValid = false;
     }
 
@@ -99,7 +99,7 @@ const FloatingFeedback = () => {
     }
   };
 
-  const isFormValid = formData.feedbackType && formData.message.trim();
+  const isFormValid = formData.type && formData.message.trim();
 
   return (
     <>
@@ -148,18 +148,18 @@ const FloatingFeedback = () => {
                   <label htmlFor="feedbackType">Feedback Type</label>
                   <select
                     id="feedbackType"
-                    name="feedbackType"
-                    value={formData.feedbackType}
+                    name="type"
+                    value={formData.type}
                     onChange={handleChange}
-                    className={errors.feedbackType ? 'error' : ''}
+                    className={errors.type ? 'error' : ''}
                   >
                     <option value="" disabled hidden>Select feedback type</option>
                     <option value="bug">Report a Bug</option>
                     <option value="feature">Suggest a Feature</option>
                     <option value="general">Leave a Comment</option>
                   </select>
-                  {errors.feedbackType && (
-                    <span className="error-message">{errors.feedbackType}</span>
+                  {errors.type && (
+                    <span className="error-message">{errors.type}</span>
                   )}
                 </div>
 

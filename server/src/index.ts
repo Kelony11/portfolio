@@ -10,10 +10,16 @@ import { Contact } from "./models/ContactSchema";
 
 dotenv.config();
 
+// Validate required environment variables
+if (!process.env.MONGODB_URI) {
+  console.error("❌ MONGODB_URI is required in environment variables");
+  process.exit(1);
+}
+
 const app = express();
-// const PORT = process.env.PORT ? Number(process.env.PORT) : 4000;
-const PORT = Number(process.env.PORT) || 8080;
-const MONGODB_URI = process.env.MONGODB_URI || "";
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
+const MONGODB_URI = process.env.MONGODB_URI;
+const NODE_ENV = process.env.NODE_ENV || 'development';
 
 /* =========================
    CORS (Put BEFORE helmet!)
@@ -31,11 +37,12 @@ const allowedOrigins = [
 
 app.set("trust proxy", 1);
 
-
 app.use(cors({
-  origin: '*',
+  origin: NODE_ENV === 'production' ? allowedOrigins : '*',
   credentials: true,
-})); // Allow all origins for testing
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 /* =========================
    Security & Parsing
 ========================= */
@@ -181,14 +188,78 @@ app.post("/api/contact", contactLimiter, async (req, res) => {
    Start Server AFTER DB
 ========================= */
 
-connectDB(MONGODB_URI)
-  .then(() => {
-    console.log("✅ Connected to MongoDB");
-    app.listen(PORT, () => {
-      console.log(`✅ Backend running on port ${PORT}`);
+let server: ReturnType<typeof app.listen>;
+
+async function startServer() {
+  try {
+    // Connect to database first
+    await connectDB(MONGODB_URI, {
+      reuseExisting: true,
+      label: NODE_ENV,
     });
-  })
-  .catch((err) => {
-    console.error("❌ MongoDB connection failed:", err);
+    
+    // Start server only after successful DB connection
+    server = app.listen(PORT, '0.0.0.0', () => {
+      console.log(`✅ Server running on port ${PORT} in ${NODE_ENV} mode`);
+      console.log(`✅ Health check: http://localhost:${PORT}/health`);
+    });
+    
+    // Handle server errors
+    server.on('error', (error: NodeJS.ErrnoException) => {
+      if (error.code === 'EADDRINUSE') {
+        console.error(`❌ Port ${PORT} is already in use`);
+      } else {
+        console.error('❌ Server error:', error);
+      }
+      process.exit(1);
+    });
+    
+  } catch (err) {
+    console.error("❌ Failed to start server:", err);
     process.exit(1);
-  });
+  }
+}
+
+/* =========================
+   Graceful Shutdown
+========================= */
+
+async function gracefulShutdown(signal: string) {
+  console.log(`\n⚠️  ${signal} received. Starting graceful shutdown...`);
+  
+  // Close server to stop accepting new connections
+  if (server) {
+    server.close(() => {
+      console.log('✅ HTTP server closed');
+    });
+  }
+  
+  // Close database connection
+  try {
+    const mongoose = await import('mongoose');
+    await mongoose.default.connection.close();
+    console.log('✅ Database connection closed');
+  } catch (err) {
+    console.error('❌ Error closing database:', err);
+  }
+  
+  process.exit(0);
+}
+
+// Handle graceful shutdown signals
+process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
+process.on('SIGINT', () => gracefulShutdown('SIGINT'));
+
+// Handle uncaught errors
+process.on('uncaughtException', (err) => {
+  console.error('❌ Uncaught Exception:', err);
+  gracefulShutdown('UNCAUGHT_EXCEPTION');
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('❌ Unhandled Rejection at:', promise, 'reason:', reason);
+  gracefulShutdown('UNHANDLED_REJECTION');
+});
+
+// Start the application
+startServer();

@@ -58,12 +58,6 @@ export const createContactService = async (data: any, res: any, req: any) => {
         );
 
         throw new Error("You can only send one message every 7 days.");
-        //   return res.status(429).json({
-        //     ok: false,
-        //     error: "MESSAGE_LIMIT",
-        //     message: "You can only send one message every 7 days.",
-        //     nextAllowedAt: nextAllowedAt.toISOString(),
-        //   });
     }
 
     const doc = await Contact.create({

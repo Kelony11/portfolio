@@ -98,7 +98,6 @@ app.get("/health", (_req, res) => {
    Contact Endpoint
 ========================= */
 
-// app.post("/api/contact", contactLimiter, );
 router.post("/contact", contactLimiter, createContactController)
 
 
@@ -107,14 +106,7 @@ router.post("/contact", contactLimiter, createContactController)
    Feedback Endpoint
 ========================= */
 
-
 router.post("/feedback", createFeedBackController);
-
-// app.post("/api/feedback",createFeedBackController );
-
-// routing 
-
-
 
 
 /* =========================
@@ -133,22 +125,22 @@ async function startServer() {
     
     // Start server only after successful DB connection
     server = app.listen(PORT, '0.0.0.0', () => {
-      console.log(`✅ Server running on port ${PORT} in ${NODE_ENV} mode`);
-      console.log(`✅ Health check: http://localhost:${PORT}/health`);
+      // console.log(`✅ Server running on port ${PORT} in ${NODE_ENV} mode`);
+      // console.log(`✅ Health check: http://localhost:${PORT}/health`);
     });
     
     // Handle server errors
     server.on('error', (error: NodeJS.ErrnoException) => {
       if (error.code === 'EADDRINUSE') {
-        console.error(`❌ Port ${PORT} is already in use`);
+        // console.error(`❌ Port ${PORT} is already in use`);
       } else {
-        console.error('❌ Server error:', error);
+        // console.error('❌ Server error:', error);
       }
       process.exit(1);
     });
     
   } catch (err) {
-    console.error("❌ Failed to start server:", err);
+    // console.error("❌ Failed to start server:", err);
     process.exit(1);
   }
 }
@@ -163,15 +155,15 @@ async function gracefulShutdown(signal: string) {
   // Close server to stop accepting new connections
   if (server) {
     server.close(() => {
-      console.log('✅ HTTP server closed');
+      // console.log('✅ HTTP server closed');
     });
   }  // Close database connection
   try {
     const mongoose = await import('mongoose');
     await mongoose.default.connection.close();
-    console.log('✅ Database connection closed');
+    // console.log('✅ Database connection closed');
   } catch (err) {
-    console.error('❌ Error closing database:', err);
+    // console.error('❌ Error closing database:', err);
   }
   
   process.exit(0);
@@ -183,12 +175,12 @@ process.on('SIGINT', () => gracefulShutdown('SIGINT'));
 
 // Handle uncaught errors
 process.on('uncaughtException', (err) => {
-  console.error('❌ Uncaught Exception:', err);
+  // console.error('❌ Uncaught Exception:', err);
   gracefulShutdown('UNCAUGHT_EXCEPTION');
 });
 
 process.on('unhandledRejection', (reason, promise) => {
-  console.error('❌ Unhandled Rejection at:', promise, 'reason:', reason);
+  // console.error('❌ Unhandled Rejection at:', promise, 'reason:', reason);
   gracefulShutdown('UNHANDLED_REJECTION');
 });
 

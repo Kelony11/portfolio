@@ -156,7 +156,7 @@ const FloatingFeedback = () => {
                     <option value="" disabled hidden>Select feedback type</option>
                     <option value="bug">Report a Bug</option>
                     <option value="feature">Suggest a Feature</option>
-                    <option value="general">Leave a Comment</option>
+                    <option value="Comment">Leave a Comment</option>
                   </select>
                   {errors.type && (
                     <span className="error-message">{errors.type}</span>

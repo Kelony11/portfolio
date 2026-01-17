@@ -8,21 +8,21 @@ const ProjectsContent = () => {
   const projects = [
     {
       title: "TradeLens",
-      description: "This is a project description text example",
-      technologies: ["React", "Node.js", "WebSocket", "D3.js", "PostgreSQL"],
-      github: "https://github.com/yourusername/tradelens",
+      description: "A backend service that supports user accounts, portfolio creation and tracking, and generates automated BUY/SELL/HOLD trading signals using real-time stock data.",
+      technologies: ["FastAPI", "Google Firestore", "Yahoo Finance API", "Pydantic", "Postman"],
+      github: "https://github.com/Kelony11/TradeLens",
       features: [
-        "Real-time stock market data visualization",
-        "Simple Moving Average (SMA) calculations",
-        "Interactive charts and graphs",
-        "User portfolio management",
+        "Real-time market data visualization",
+        "Portfolio creation and management",
+        "Live portfolio tracking and performance insights",
+        "Real-time trading signals from market price movements",
       ],
     },
     {
-      title: "E-Commerce Platform",
-      description: "This is a project description text example",
+      title: "FittedIn",
+      description: "A wellness social platform designed for goal tracking, user profiles, and fitness networking.",
       technologies: ["Next.js", "Stripe", "MongoDB", "Tailwind CSS", "Redux"],
-      github: "https://github.com/yourusername/ecommerce",
+      github: "https://github.com/Kelony11/FittedIn",
       features: [
         "Secure payment processing with Stripe",
         "Advanced product filtering and search",

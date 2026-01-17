@@ -6,33 +6,34 @@ const WorkContent = () => {
       <h2 className="section-title">Work Experience</h2>
       
       <div className="timeline">
+
         <div className="timeline-item">
           <div className="timeline-marker"></div>
           <div className="timeline-content">
             <div className="work-header">
-              <h3>Senior Full Stack Developer</h3>
-              <span className="work-period">2022 - Present</span>
+              <h3>Software Developer Co-op</h3>
+              <span className="work-period">Jan - Jun 2025</span>
             </div>
-            <h4 className="company-name">Tech Innovations Inc.</h4>
+            <h4 className="company-name">Johnson & Johnson Technology</h4>
             <p className="work-description">
-              Leading the development of scalable web applications serving 100K+ users. 
-              Architected microservices infrastructure and mentored junior developers.
+              Built internal developer tooling and UI improvements to streamline
+              onboarding, improve performance, and standardize delivery workflows across teams.
             </p>
             <div className="tech-tags">
+              <span className="tag">Python</span>
               <span className="tag">React</span>
-              <span className="tag">Node.js</span>
-              <span className="tag">PostgreSQL</span>
-              <span className="tag">AWS</span>
+              <span className="tag">TanStack Router</span>
+              <span className="tag">Bitbucket</span>
             </div>
             <ul className="achievements">
-              <li>Improved application performance by 60% through code optimization</li>
-              <li>Led migration from monolith to microservices architecture</li>
-              <li>Implemented CI/CD pipeline reducing deployment time by 75%</li>
+              <li>Automated TanStack Router setup with a Python CLI</li>
+              <li>Improved Recognition App load time and page performance</li>
+              <li>Standardized CI and Git workflows across 12 projects</li>
             </ul>
           </div>
         </div>
 
-        <div className="timeline-item">
+        {/* <div className="timeline-item">
           <div className="timeline-marker"></div>
           <div className="timeline-content">
             <div className="work-header">
@@ -56,59 +57,33 @@ const WorkContent = () => {
               <li>Mentored 3 junior developers in best practices</li>
             </ul>
           </div>
-        </div>
+        </div> */}
 
         <div className="timeline-item">
           <div className="timeline-marker"></div>
           <div className="timeline-content">
             <div className="work-header">
-              <h3>Junior Web Developer</h3>
-              <span className="work-period">2019 - 2020</span>
+              <h3>Software Developer Intern</h3>
+              <span className="work-period">May - Aug 2024</span>
             </div>
-            <h4 className="company-name">StartUp Hub</h4>
+            <h4 className="company-name">Cisco</h4>
             <p className="work-description">
-              Started my professional journey building responsive websites and learning industry best practices. 
-              Contributed to various client projects and internal tools.
+              Built and optimized internal web tools to automate product testing workflows and improve 
+              visibility into factory performance through real-time reporting and dashboards.
             </p>
             <div className="tech-tags">
-              <span className="tag">JavaScript</span>
-              <span className="tag">HTML/CSS</span>
-              <span className="tag">jQuery</span>
-              <span className="tag">Bootstrap</span>
+              <span className="tag">Python</span>
+              <span className="tag">React</span>
+              <span className="tag">REST APIs</span>
             </div>
             <ul className="achievements">
-              <li>Developed 20+ responsive landing pages</li>
-              <li>Improved website loading times by 50%</li>
-              <li>Learned agile development methodologies</li>
+              <li>Built Python + React tools to automate internal reporting</li>
+              <li>Created a real-time factory KPI dashboard</li>
+              <li>Improved visibility and sped up decisions for cross-site teams</li>
             </ul>
           </div>
         </div>
-
-        <div className="timeline-item">
-          <div className="timeline-marker"></div>
-          <div className="timeline-content">
-            <div className="work-header">
-              <h3>Web Development Intern</h3>
-              <span className="work-period">2018 - 2019</span>
-            </div>
-            <h4 className="company-name">Creative Digital Agency</h4>
-            <p className="work-description">
-              Gained hands-on experience in web development, working alongside experienced developers 
-              on real-world projects. Learned version control and collaborative coding.
-            </p>
-            <div className="tech-tags">
-              <span className="tag">HTML</span>
-              <span className="tag">CSS</span>
-              <span className="tag">JavaScript</span>
-              <span className="tag">Git</span>
-            </div>
-            <ul className="achievements">
-              <li>Assisted in building 10+ client websites</li>
-              <li>Fixed 100+ bugs and UI inconsistencies</li>
-              <li>Learned professional development workflows</li>
-            </ul>
-          </div>
-        </div>
+        
       </div>
     </div>
   );

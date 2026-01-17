@@ -17,7 +17,7 @@ const ContactSchema = new mongoose.Schema(
 
 );
 
-// Auto-delete messages ~90 days after createdAt
-ContactSchema.index({ createdAt: 1}, {expireAfterSeconds: 60 * 60 * 24 * 90});
+// Auto-delete messages ~30 days after createdAt
+ContactSchema.index({ createdAt: 1}, {expireAfterSeconds: 60 * 60 * 24 * 30});
 
 export const Contact = mongoose.model("Contact", ContactSchema);

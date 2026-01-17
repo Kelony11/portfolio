@@ -7,6 +7,7 @@ import rateLimit from "express-rate-limit";
 import { verifyTurnstile } from "./turnstile";
 import { connectDB } from "./db";
 import { Contact } from "./models/ContactSchema";
+import { Feedback } from "./models/FeedbackSchema";
 
 dotenv.config();
 
@@ -82,10 +83,10 @@ app.get("/health", (_req, res) => {
   });
 });
 
+
 /* =========================
    Contact Endpoint
 ========================= */
-
 
 app.post("/api/contact", contactLimiter, async (req, res) => {
 
@@ -101,9 +102,6 @@ app.post("/api/contact", contactLimiter, async (req, res) => {
       company,
     } = req.body;
 
-    // if (process.env.NODE_ENV){ 
-
-    // }
 
     // Honeypot (bots think they succeeded)
     if (company) return res.status(200).json({ ok: true });
@@ -176,6 +174,37 @@ app.post("/api/contact", contactLimiter, async (req, res) => {
     return res.status(500).json({ ok: false, error: "SERVER_ERROR" });
   }
 });
+
+
+/* =========================
+   Feedback Endpoint
+========================= */
+
+app.post("/api/feedback", async (req, res) => {
+  try {
+    const { type, message } = req.body;
+    console.log(req.body);
+
+    // Basic validation
+    if (!type || !message) {
+      return res.status(400).json({ ok: false, error: "MISSING_FIELDS" });
+    }
+
+    const doc = await Feedback.create({
+      type,
+      message,
+    });
+
+    return res.status(201).json({ ok: true, id: doc._id });
+  } catch (err) {
+    console.error("❌ /api/feedback error:", err);
+
+    return res.status(500).json({ ok: false, error: "SERVER_ERROR" });
+  }
+});
+
+
+
 
 /* =========================
    Start Server AFTER DB

@@ -7,18 +7,16 @@ const BioContent = () => {
       
       <div className="bio-intro">
         <p>
-          Hey there! Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
-          standard dummy text ever since the 1500s, 
-          when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+          Hey there! I'm a graduate Software Engineering student at Rutgers with a passion for building scalable backend systems, developer tools, and real-world software.
+          Whether it's automating workflows, designing APIs, or deploying full-stack apps, I enjoy solving problems through clean, thoughtful engineering.
         </p>
       </div>
 
       <div className="bio-section">
         <h3>Background</h3>
         <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
-          standard dummy text ever since the 1500s, 
-          when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+          I've interned at Johnson & Johnson and Cisco, where I built internal tools using Python, React, and SQL to improve automation and decision-making across teams.
+          My academic and personal projects like TradeLens and FittedIn, span backend platforms, cloud deployment (AWS/Firebase), and systems-level development with Rust and C.
         </p>
       </div>
 
@@ -152,22 +150,22 @@ const BioContent = () => {
 
       <div className="bio-section">
         <h3>Certifications</h3>
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
-          standard dummy text ever since the 1500s, 
-          when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-        </p>
+        <li>
+          <b>Professional Scrum Master 2025 (PSM I) - Scrum.org</b>
+        </li>
+        <br/>
+        
       </div>
 
 
-      <div className="bio-section">
+      {/* <div className="bio-section">
         <h3>Interests</h3>
         <p>
           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
           standard dummy text ever since the 1500s, 
           when an unknown printer took a galley of type and scrambled it to make a type specimen book.
         </p>
-      </div>
+      </div> */}
 
     </div>
   );

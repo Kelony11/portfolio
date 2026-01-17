@@ -1,6 +1,8 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react';
 import './FloatingFeedback.css';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const FloatingFeedback = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
@@ -64,15 +66,23 @@ const FloatingFeedback = () => {
     setSubmitError(null);
 
     try {
-      // Simulate API call - replace with your actual endpoint
-      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      const payload = {
+        ...formData,
+      };
       
-      // TODO: Replace with actual API call
-      // const res = await fetch(`${API_URL}/api/feedback`, {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData)
-      // });
+      // Replace with actual API call
+      const res = await fetch(`${API_URL}/api/feedback`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        throw new Error(data.message || 'Failed to send feedback');
+      }
 
       setSubmitSuccess(true);
       
@@ -81,8 +91,9 @@ const FloatingFeedback = () => {
         handleClose();
       }, 2000);
       
-    } catch {
-        setSubmitError('Failed to send feedback. Please try again.');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Something went wrong.";
+      setSubmitError(message);
     } finally {
         setIsSubmitting(false);
     }

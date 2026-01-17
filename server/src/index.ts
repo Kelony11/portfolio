@@ -4,10 +4,9 @@ import helmet from "helmet";
 import dotenv from "dotenv";
 import rateLimit from "express-rate-limit";
 
-import { verifyTurnstile } from "./turnstile";
 import { connectDB } from "./db";
-import { Contact } from "./models/ContactSchema";
-import { Feedback } from "./models/FeedbackSchema";
+import { createFeedBackController } from "./controller/feedback.controller";
+import { createContactController } from "./controller/contact.controller";
 
 dotenv.config();
 
@@ -21,6 +20,9 @@ const app = express();
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
 const MONGODB_URI = process.env.MONGODB_URI;
 const NODE_ENV = process.env.NODE_ENV || 'development';
+
+const router = express.Router();
+
 
 /* =========================
    CORS (Put BEFORE helmet!)
@@ -56,6 +58,7 @@ app.use(helmet({
 
 // Parse JSON with size limit (safe for contact forms)
 app.use(express.json({ limit: "50kb" }));
+app.use('/api', router);
 
 /* =========================
    Rate limiting (contact only)
@@ -95,120 +98,21 @@ app.get("/health", (_req, res) => {
    Contact Endpoint
 ========================= */
 
-app.post("/api/contact", contactLimiter, async (req, res) => {
+// app.post("/api/contact", contactLimiter, );
+router.post("/contact", contactLimiter, createContactController)
 
-  try {
-    const {
-      name,
-      email,
-      message,
-      phone,
-      phoneType,
-      wantsReply,
-      turnstileToken,
-      company,
-    } = req.body;
-
-
-    // Honeypot (bots think they succeeded)
-    if (company) return res.status(200).json({ ok: true });
-
-    if (!name || !email || !message) {
-      return res.status(400).json({ ok: false, error: "MISSING_FIELDS" });
-    }
-
-    if (!turnstileToken) {
-      return res.status(400).json({
-        ok: false,
-        error: "CAPTCHA_REQUIRED",
-        message: "Captcha required.",
-      });
-    }
-
-    // Get client IP safely (Cloudflare / proxy / local)
-    const ip =
-      (req.headers["cf-connecting-ip"] as string) ||
-      (req.headers["x-forwarded-for"] as string)?.split(",")[0]?.trim() ||
-      req.ip;
-
-
-    const result = await verifyTurnstile(turnstileToken, ip);
-
-    if (!result.success) {
-      return res.status(400).json({
-        ok: false,
-        error: "CAPTCHA_FAILED",
-        message: "Captcha failed. Please try again.",
-      });
-    }
-
-    const normalizedEmail = String(email).toLowerCase().trim();
-
-    // Enforce 1 message per 7 days
-    const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
-    const since = new Date(Date.now() - SEVEN_DAYS_MS);
-
-    const recent = await Contact.findOne({
-      email: normalizedEmail,
-      createdAt: { $gte: since },
-    }).sort({ createdAt: -1 });
-
-    if (recent) {
-      const nextAllowedAt = new Date(
-        recent.createdAt.getTime() + SEVEN_DAYS_MS
-      );
-
-      return res.status(429).json({
-        ok: false,
-        error: "MESSAGE_LIMIT",
-        message: "You can only send one message every 7 days.",
-        nextAllowedAt: nextAllowedAt.toISOString(),
-      });
-    }
-
-    const doc = await Contact.create({
-      name,
-      email: normalizedEmail,
-      message,
-      phone: phone || undefined,
-      phoneType: phoneType || undefined,
-      wantsReply: wantsReply === "yes" || wantsReply === true,
-    });
-
-    return res.status(201).json({ ok: true, id: doc._id });
-  } catch (err) {
-    console.error("❌ /api/contact error:", err);
-    return res.status(500).json({ ok: false, error: "SERVER_ERROR" });
-  }
-});
 
 
 /* =========================
    Feedback Endpoint
 ========================= */
 
-app.post("/api/feedback", async (req, res) => {
-  try {
-    const { type, message } = req.body;
-    console.log(req.body);
 
-    // Basic validation
-    if (!type || !message) {
-      return res.status(400).json({ ok: false, error: "MISSING_FIELDS" });
-    }
+router.post("/feedback", createFeedBackController);
 
-    const doc = await Feedback.create({
-      type,
-      message,
-    });
+// app.post("/api/feedback",createFeedBackController );
 
-    return res.status(201).json({ ok: true, id: doc._id });
-  } catch (err) {
-    console.error("❌ /api/feedback error:", err);
-
-    return res.status(500).json({ ok: false, error: "SERVER_ERROR" });
-  }
-});
+// routing 
 
 
 
@@ -261,9 +165,7 @@ async function gracefulShutdown(signal: string) {
     server.close(() => {
       console.log('✅ HTTP server closed');
     });
-  }
-  
-  // Close database connection
+  }  // Close database connection
   try {
     const mongoose = await import('mongoose');
     await mongoose.default.connection.close();

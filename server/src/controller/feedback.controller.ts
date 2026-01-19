@@ -1,14 +1,22 @@
 import { Request, Response } from "express";
 import { createFeedbackService } from "../services/feedback.service";
+import { sendPortfolioEmail } from "../utils/mailer";
+import { feedbackTemplate } from "../utils/emailTemplates";
 
 export const createFeedBackController = async (req: Request, res: Response) => {
-    try {
-        
-        const data = await createFeedbackService(req.body);
-        return res.status(201).json({ ok: true, data });
-    } catch (err) {
-        console.error("❌ /api/feedback error:", err);
+  try {
+    const result = await createFeedbackService(req.body);
+    const data = result.toObject();
 
-        return res.status(500).json({ ok: false, error: "SERVER_ERROR" });
-    }
-}
+    await sendPortfolioEmail({
+      type: "FEEDBACK",
+      subject: "📥 Portfolio Alert: New feedback received",
+      html: feedbackTemplate(data),
+    });
+
+    return res.status(201).json({ ok: true, data });
+  } catch (err) {
+    console.error("❌ /api/feedback error:", err);
+    return res.status(500).json({ ok: false, error: "SERVER_ERROR" });
+  }
+};

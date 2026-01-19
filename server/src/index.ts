@@ -4,10 +4,16 @@ import helmet from "helmet";
 import dotenv from "dotenv";
 import rateLimit from "express-rate-limit";
 
+// From other files
 import { connectDB } from "./db";
-import { createFeedBackController } from "./controller/feedback.controller";
 import { createContactController } from "./controller/contact.controller";
+import { createContactService } from "./services/contact.service";
 
+import contactRoutes from "./routes/contact.routes";
+import feedbackRoutes from "./routes/feedback.routes";
+
+
+// load environment variables
 dotenv.config();
 
 // Validate required environment variables
@@ -58,6 +64,12 @@ app.use(helmet({
 
 // Parse JSON with size limit (safe for contact forms)
 app.use(express.json({ limit: "50kb" }));
+
+/* =========================
+// from routes files */
+router.use("/contact", contactRoutes);
+router.use("/feedback", feedbackRoutes);
+
 app.use('/api', router);
 
 /* =========================
@@ -98,7 +110,7 @@ app.get("/health", (_req, res) => {
    Contact Endpoint
 ========================= */
 
-router.post("/contact", contactLimiter, createContactController)
+router.post("/contact", contactLimiter, contactRoutes)
 
 
 
@@ -106,7 +118,7 @@ router.post("/contact", contactLimiter, createContactController)
    Feedback Endpoint
 ========================= */
 
-router.post("/feedback", createFeedBackController);
+router.post("/feedback", feedbackRoutes);
 
 
 /* =========================

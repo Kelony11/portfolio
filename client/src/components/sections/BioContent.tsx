@@ -73,12 +73,12 @@ const BioContent = () => {
                 <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
               </svg>
             </div>
-            <h4>Database</h4>
+            <h4>Database & APIs</h4>
             <ul className="skill-list">
               <li>PostgreSQL</li>
-              <li>Firebase Firestore</li>
-              <li>SQL</li>
-              <li>REST/JSON APIs</li>
+              <li>Mongo DB</li>
+              <li>Firestore</li>
+              <li>REST/JSON</li>
             </ul>
           </div>
           
@@ -88,7 +88,7 @@ const BioContent = () => {
                 <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
               </svg>
             </div>
-            <h4>Cloud</h4>
+            <h4>Cloud & DevOps</h4>
             <ul className="skill-list">
               <li>AWS (EC2)</li>
               <li>Firebase (Auth, Storage)</li>
@@ -126,21 +126,13 @@ const BioContent = () => {
             </div>
           </div>
 
+
           <div className="tech-category">
-            <h4>DevOps & Tools</h4>
+            <h4>Tools & Testing</h4>
             <div className="tech-tags">
-              <span className="tech-tag">AWS (EC2)</span>
-              <span className="tech-tag">Docker</span>
-              <span className="tech-tag">GitHub Actions</span>
               <span className="tech-tag">Git</span>
               <span className="tech-tag">Postman</span>
               <span className="tech-tag">Linux/Unix</span>
-            </div>
-          </div>
-
-          <div className="tech-category">
-            <h4>Testing</h4>
-            <div className="tech-tags">
               <span className="tech-tag">Jasmine</span>
               <span className="tech-tag">Pytest</span>
             </div>

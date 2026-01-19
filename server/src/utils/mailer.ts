@@ -26,7 +26,7 @@ export async function sendPortfolioEmail({
   return transporter.sendMail({
     from: `"Portfolio Bot" <${process.env.MAIL_USER}>`,
     to: process.env.MAIL_TO,
-    subject: `[${type}] ${subject}`,
+    subject: `${subject}`,
     html,
     ...(replyTo ? { replyTo } : {}),
   });

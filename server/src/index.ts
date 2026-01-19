@@ -4,6 +4,9 @@ import helmet from "helmet";
 import dotenv from "dotenv";
 import rateLimit from "express-rate-limit";
 
+// load environment variables FIRST
+dotenv.config();
+
 // From other files
 import { connectDB } from "./db";
 import { createContactController } from "./controller/contact.controller";
@@ -11,10 +14,6 @@ import { createContactService } from "./services/contact.service";
 
 import contactRoutes from "./routes/contact.routes";
 import feedbackRoutes from "./routes/feedback.routes";
-
-
-// load environment variables
-dotenv.config();
 
 // Validate required environment variables
 if (!process.env.MONGODB_URI) {

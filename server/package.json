@@ -20,6 +20,7 @@
     "helmet": "^8.1.0",
     "mongodb": "^7.0.0",
     "mongoose": "^9.1.0",
+    "nodemailer": "^7.0.12",
     "typescript": "^5.9.3",
     "zod": "^4.3.4"
   },

@@ -92,7 +92,7 @@ modern user experience with light/dark mode support.
 
 <div align="center">
   <ul align="left"><b>2. Light / Dark Theme Toggle</b></ul>
-  <img src="assets/daytime_landing_page.png" alt="Light theme" width="900"/>
+  <img src="assets/daytime_landing_page.png" alt="light theme" width="900"/>
   <br/>
   <strong>Light theme ☀️</strong>
   <img src="assets/landing_page.png" alt="Dark theme" width="900"/>

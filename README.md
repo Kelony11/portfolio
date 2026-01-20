@@ -17,7 +17,6 @@ infrastructure.
   </a>
 </div>
 
-- **Landing Page**
 
 ---
 ## 🚀 OVERVIEW 

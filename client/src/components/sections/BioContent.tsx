@@ -58,10 +58,10 @@ const BioContent = () => {
             </div>
             <h4>Backend</h4>
             <ul className="skill-list">
-              <li>Node.js & Express</li>
+              <li>Node.js & Express (REST APIs, Middleware)</li>
               <li>Python</li>
               <li>Swift</li>
-              <li>Sequelize</li>
+              <li>Rate Limiting & API Security</li>
             </ul>
           </div>
           
@@ -76,9 +76,9 @@ const BioContent = () => {
             <h4>Database & APIs</h4>
             <ul className="skill-list">
               <li>PostgreSQL</li>
-              <li>Mongo DB</li>
+              <li>MongoDB</li>
               <li>Firestore</li>
-              <li>REST/JSON</li>
+              <li>RESTful APIs (JSON)</li>
             </ul>
           </div>
           
@@ -90,10 +90,10 @@ const BioContent = () => {
             </div>
             <h4>Cloud & DevOps</h4>
             <ul className="skill-list">
-              <li>AWS (EC2)</li>
+              <li>AWS EC2 (Production Deployment)</li>
               <li>Firebase (Auth, Storage)</li>
-              <li>Docker</li>
-              <li>GitHub Actions</li>
+              <li>Cloudflare Turnstile (Bot Protection)</li>
+              <li>Domain & DNS Management</li>
             </ul>
           </div>
         </div>
@@ -123,6 +123,7 @@ const BioContent = () => {
               <span className="tech-tag">SwiftUI</span>
               <span className="tech-tag">TanStack Router</span>
               <span className="tech-tag">Sequelize</span>
+              <span className="tech-tag">Nodemailer</span>
             </div>
           </div>
 
@@ -135,6 +136,7 @@ const BioContent = () => {
               <span className="tech-tag">Linux/Unix</span>
               <span className="tech-tag">Jasmine</span>
               <span className="tech-tag">Pytest</span>
+              <span className="tech-tag">MongoDB Compass</span>
             </div>
           </div>
         </div>

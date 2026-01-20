@@ -9,7 +9,7 @@ const ProjectsContent = () => {
     {
       title: "TradeLens",
       description: "A backend service that supports user accounts, portfolio creation and tracking, and generates automated BUY/SELL/HOLD trading signals using real-time stock data.",
-      technologies: ["FastAPI", "Google Firestore", "Yahoo Finance API", "Pydantic", "Postman"],
+      technologies: ["Python", "FastAPI", "Google Firestore", "Yahoo Finance API", "Pydantic", "Postman"],
       github: "https://github.com/Kelony11/TradeLens",
       features: [
         "Real-time market data visualization",
@@ -20,14 +20,14 @@ const ProjectsContent = () => {
     },
     {
       title: "MyPortfolio Website",
-      description: "This is a project description text example",
-      technologies: ["", "", "", ""],
-      github: "https://github.com/yourusername/taskmanager",
+      description: "A full-stack MERN portfolio with smart project discovery, secure contact & feedback messaging, light/dark mode, and production-grade deployment on AWS.",
+      technologies: ["React", "TypeScript", "JavaScript", "Node.js", "MongoDB", "AWS EC2", "Cloudfare", "Express.js"],
+      github: "https://github.com/Kelony11/portfolio",
       features: [
-        "Dummy data",
-        "Dummy data",
-        "Dummy data",
-        "Dummy data",
+        "Smart project filtering by technology stack",
+        "Intelligent project suggestions when no filters match",
+        "Light & dark mode with responsive UI design",
+        "Bot protection and rate-limited APIs for security",
       ],
     },
     {

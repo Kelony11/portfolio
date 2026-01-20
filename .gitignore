@@ -42,6 +42,3 @@ docs.pdf
 
 # Hide idea from Pycharm
 .idea/
-
-# Hide my assets screenshots
-assets/

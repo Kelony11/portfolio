@@ -6,6 +6,8 @@ A full-stack **MERN portfolio platform** showcasing projects, experience, and te
 featuring real-time contact & feedback messaging, smart project discovery, and production-grade
 infrastructure.
 
+<br/>
+
 <div align="center">
   <img src="assets/landing_page.png" alt="Landing page to my portfolio" width="900"/>
   <br/>

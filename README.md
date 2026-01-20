@@ -85,8 +85,8 @@ modern user experience with light/dark mode support.
   <ul align="left"><b>1. Smart project suggestion & filtering system</b></ul>
   <img src="assets/filter_match.png" alt="Filtered projects by tech stack" width="900"/>
   <br/>
-  <br/>
   <strong>Easily filter projects by technology stack 😌</strong>
+  <br/>
   <img src="assets/filter_no_match.png" alt="Suggests relevant projects when no filters match" width="900"/>
   <br/>
   <strong>Smart project suggestions when no exact filter matches 🤖</strong>
@@ -99,6 +99,7 @@ modern user experience with light/dark mode support.
   <img src="assets/daytime_landing_page.png" alt="light theme" width="900"/>
   <br/>
   <strong>Light theme ☀️</strong>
+  <br/>
   <img src="assets/landing_page.png" alt="Dark theme" width="900"/>
   <br/>
   <strong>Dark theme 🌙</strong>

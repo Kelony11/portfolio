@@ -113,8 +113,7 @@
 
 /* Work Content Styles */
 .timeline {
-  position: relative;
-  padding-left: 3rem;
+  padding-left: 0;
 }
 
 .timeline::before {

@@ -1,14 +1,16 @@
 import { useState, type ChangeEvent, type FormEvent } from 'react';
 import './FloatingFeedback.css';
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 const FloatingFeedback = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [formData, setFormData] = useState({
-    feedbackType: '',
+    type: '',
     message: ''
   });
   const [errors, setErrors] = useState({
-    feedbackType: '',
+    type: '',
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -23,8 +25,8 @@ const FloatingFeedback = () => {
     setIsOpen(false);
     setSubmitSuccess(false);
     setSubmitError(null);
-    setFormData({ feedbackType: '', message: '' });
-    setErrors({ feedbackType: '', message: '' });
+    setFormData({ type: '', message: '' });
+    setErrors({ type: '', message: '' });
   };
 
   const handleChange = (e: ChangeEvent<HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -38,11 +40,11 @@ const FloatingFeedback = () => {
   };
 
   const validateForm = () => {
-    const newErrors = { feedbackType: '', message: '' };
+    const newErrors = { type: '', message: '' };
     let isValid = true;
 
-    if (!formData.feedbackType) {
-      newErrors.feedbackType = 'Please select a feedback type';
+    if (!formData.type) {
+      newErrors.type = 'Please select a feedback type';
       isValid = false;
     }
 
@@ -64,15 +66,23 @@ const FloatingFeedback = () => {
     setSubmitError(null);
 
     try {
-      // Simulate API call - replace with your actual endpoint
-      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      const payload = {
+        ...formData,
+      };
       
-      // TODO: Replace with actual API call
-      // const res = await fetch(`${API_URL}/api/feedback`, {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(formData)
-      // });
+      // Replace with actual API call
+      const res = await fetch(`${API_URL}/api/feedback`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        throw new Error(data.message || 'Failed to send feedback');
+      }
 
       setSubmitSuccess(true);
       
@@ -81,14 +91,15 @@ const FloatingFeedback = () => {
         handleClose();
       }, 2000);
       
-    } catch {
-        setSubmitError('Failed to send feedback. Please try again.');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Something went wrong.";
+      setSubmitError(message);
     } finally {
         setIsSubmitting(false);
     }
   };
 
-  const isFormValid = formData.feedbackType && formData.message.trim();
+  const isFormValid = formData.type && formData.message.trim();
 
   return (
     <>
@@ -137,18 +148,18 @@ const FloatingFeedback = () => {
                   <label htmlFor="feedbackType">Feedback Type</label>
                   <select
                     id="feedbackType"
-                    name="feedbackType"
-                    value={formData.feedbackType}
+                    name="type"
+                    value={formData.type}
                     onChange={handleChange}
-                    className={errors.feedbackType ? 'error' : ''}
+                    className={errors.type ? 'error' : ''}
                   >
                     <option value="" disabled hidden>Select feedback type</option>
                     <option value="bug">Report a Bug</option>
                     <option value="feature">Suggest a Feature</option>
-                    <option value="general">Leave a Comment</option>
+                    <option value="Comment">Leave a Comment</option>
                   </select>
-                  {errors.feedbackType && (
-                    <span className="error-message">{errors.feedbackType}</span>
+                  {errors.type && (
+                    <span className="error-message">{errors.type}</span>
                   )}
                 </div>
 

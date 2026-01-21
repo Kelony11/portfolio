@@ -7,18 +7,16 @@ const BioContent = () => {
       
       <div className="bio-intro">
         <p>
-          Hey there! Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
-          standard dummy text ever since the 1500s, 
-          when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+          Hey there! I'm a graduate Software Engineering student at Rutgers with a passion for building scalable backend systems, developer tools, and real-world software.
+          Whether it's automating workflows, designing APIs, or deploying full-stack apps, I enjoy solving problems through clean, thoughtful engineering.
         </p>
       </div>
 
       <div className="bio-section">
         <h3>Background</h3>
         <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
-          standard dummy text ever since the 1500s, 
-          when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+          I’ve interned at Johnson & Johnson and Cisco, where I built internal tools using Python, React, and SQL to improve automation and support data-driven decision-making across teams.
+          My academic and personal projects, including TradeLens and FittedIn, span backend platforms, cloud deployment (AWS/Firebase), and the integration of external data sources through APIs.
         </p>
       </div>
 
@@ -60,10 +58,10 @@ const BioContent = () => {
             </div>
             <h4>Backend</h4>
             <ul className="skill-list">
-              <li>Node.js & Express</li>
+              <li>Node.js & Express (REST APIs, Middleware)</li>
               <li>Python</li>
               <li>Swift</li>
-              <li>Sequelize</li>
+              <li>Rate Limiting & API Security</li>
             </ul>
           </div>
           
@@ -75,12 +73,12 @@ const BioContent = () => {
                 <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
               </svg>
             </div>
-            <h4>Database</h4>
+            <h4>Database & APIs</h4>
             <ul className="skill-list">
               <li>PostgreSQL</li>
-              <li>Firebase Firestore</li>
-              <li>SQL</li>
-              <li>REST/JSON APIs</li>
+              <li>MongoDB</li>
+              <li>Firestore</li>
+              <li>RESTful APIs (JSON)</li>
             </ul>
           </div>
           
@@ -90,12 +88,12 @@ const BioContent = () => {
                 <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>
               </svg>
             </div>
-            <h4>Cloud</h4>
+            <h4>Cloud & DevOps</h4>
             <ul className="skill-list">
-              <li>AWS (EC2)</li>
+              <li>AWS EC2 (Production Deployment)</li>
               <li>Firebase (Auth, Storage)</li>
-              <li>Docker</li>
-              <li>GitHub Actions</li>
+              <li>Cloudflare Turnstile (Bot Protection)</li>
+              <li>Domain & DNS Management</li>
             </ul>
           </div>
         </div>
@@ -125,26 +123,20 @@ const BioContent = () => {
               <span className="tech-tag">SwiftUI</span>
               <span className="tech-tag">TanStack Router</span>
               <span className="tech-tag">Sequelize</span>
+              <span className="tech-tag">Nodemailer</span>
             </div>
           </div>
 
+
           <div className="tech-category">
-            <h4>DevOps & Tools</h4>
+            <h4>Tools & Testing</h4>
             <div className="tech-tags">
-              <span className="tech-tag">AWS (EC2)</span>
-              <span className="tech-tag">Docker</span>
-              <span className="tech-tag">GitHub Actions</span>
               <span className="tech-tag">Git</span>
               <span className="tech-tag">Postman</span>
               <span className="tech-tag">Linux/Unix</span>
-            </div>
-          </div>
-
-          <div className="tech-category">
-            <h4>Testing</h4>
-            <div className="tech-tags">
               <span className="tech-tag">Jasmine</span>
               <span className="tech-tag">Pytest</span>
+              <span className="tech-tag">MongoDB Compass</span>
             </div>
           </div>
         </div>
@@ -152,22 +144,22 @@ const BioContent = () => {
 
       <div className="bio-section">
         <h3>Certifications</h3>
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
-          standard dummy text ever since the 1500s, 
-          when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-        </p>
+        <li>
+          <b>Professional Scrum Master 2025 (PSM I) - Scrum.org</b>
+        </li>
+        <br/>
+        
       </div>
 
 
-      <div className="bio-section">
+      {/* <div className="bio-section">
         <h3>Interests</h3>
         <p>
           Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's 
           standard dummy text ever since the 1500s, 
           when an unknown printer took a galley of type and scrambled it to make a type specimen book.
         </p>
-      </div>
+      </div> */}
 
     </div>
   );

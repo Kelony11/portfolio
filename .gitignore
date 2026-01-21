@@ -36,3 +36,9 @@ moon.pem
 
 # Hide CI/CD Pipeline
 .github
+
+# Hide Developer Notes/Documentation
+docs.pdf
+
+# Hide idea from Pycharm
+.idea/

@@ -4,16 +4,30 @@ import helmet from "helmet";
 import dotenv from "dotenv";
 import rateLimit from "express-rate-limit";
 
-import { verifyTurnstile } from "./turnstile";
-import { connectDB } from "./db";
-import { Contact } from "./models/ContactSchema";
-
+// load environment variables FIRST
 dotenv.config();
 
+// From other files
+import { connectDB } from "./db";
+import { createContactController } from "./controller/contact.controller";
+import { createContactService } from "./services/contact.service";
+
+import contactRoutes from "./routes/contact.routes";
+import feedbackRoutes from "./routes/feedback.routes";
+
+// Validate required environment variables
+if (!process.env.MONGODB_URI) {
+  console.error("❌ MONGODB_URI is required in environment variables");
+  process.exit(1);
+}
+
 const app = express();
-// const PORT = process.env.PORT ? Number(process.env.PORT) : 4000;
-const PORT = Number(process.env.PORT) || 8080;
-const MONGODB_URI = process.env.MONGODB_URI || "";
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 8080;
+const MONGODB_URI = process.env.MONGODB_URI;
+const NODE_ENV = process.env.NODE_ENV || 'development';
+
+const router = express.Router();
+
 
 /* =========================
    CORS (Put BEFORE helmet!)
@@ -31,11 +45,12 @@ const allowedOrigins = [
 
 app.set("trust proxy", 1);
 
-
 app.use(cors({
-  origin: '*',
+  origin: NODE_ENV === 'production' ? allowedOrigins : '*',
   credentials: true,
-})); // Allow all origins for testing
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
 /* =========================
    Security & Parsing
 ========================= */
@@ -48,6 +63,13 @@ app.use(helmet({
 
 // Parse JSON with size limit (safe for contact forms)
 app.use(express.json({ limit: "50kb" }));
+
+/* =========================
+// from routes files */
+router.use("/contact", contactRoutes);
+router.use("/feedback", feedbackRoutes);
+
+app.use('/api', router);
 
 /* =========================
    Rate limiting (contact only)
@@ -82,113 +104,96 @@ app.get("/health", (_req, res) => {
   });
 });
 
+
 /* =========================
    Contact Endpoint
 ========================= */
 
-
-app.post("/api/contact", contactLimiter, async (req, res) => {
-
-  try {
-    const {
-      name,
-      email,
-      message,
-      phone,
-      phoneType,
-      wantsReply,
-      turnstileToken,
-      company,
-    } = req.body;
-
-    // if (process.env.NODE_ENV){ 
-
-    // }
-
-    // Honeypot (bots think they succeeded)
-    if (company) return res.status(200).json({ ok: true });
-
-    if (!name || !email || !message) {
-      return res.status(400).json({ ok: false, error: "MISSING_FIELDS" });
-    }
-
-    if (!turnstileToken) {
-      return res.status(400).json({
-        ok: false,
-        error: "CAPTCHA_REQUIRED",
-        message: "Captcha required.",
-      });
-    }
-
-    // Get client IP safely (Cloudflare / proxy / local)
-    const ip =
-      (req.headers["cf-connecting-ip"] as string) ||
-      (req.headers["x-forwarded-for"] as string)?.split(",")[0]?.trim() ||
-      req.ip;
+router.post("/contact", contactLimiter, contactRoutes)
 
 
-    const result = await verifyTurnstile(turnstileToken, ip);
 
-    if (!result.success) {
-      return res.status(400).json({
-        ok: false,
-        error: "CAPTCHA_FAILED",
-        message: "Captcha failed. Please try again.",
-      });
-    }
+/* =========================
+   Feedback Endpoint
+========================= */
 
-    const normalizedEmail = String(email).toLowerCase().trim();
+router.post("/feedback", feedbackRoutes);
 
-    // Enforce 1 message per 7 days
-    const SEVEN_DAYS_MS = 7 * 24 * 60 * 60 * 1000;
-    const since = new Date(Date.now() - SEVEN_DAYS_MS);
-
-    const recent = await Contact.findOne({
-      email: normalizedEmail,
-      createdAt: { $gte: since },
-    }).sort({ createdAt: -1 });
-
-    if (recent) {
-      const nextAllowedAt = new Date(
-        recent.createdAt.getTime() + SEVEN_DAYS_MS
-      );
-
-      return res.status(429).json({
-        ok: false,
-        error: "MESSAGE_LIMIT",
-        message: "You can only send one message every 7 days.",
-        nextAllowedAt: nextAllowedAt.toISOString(),
-      });
-    }
-
-    const doc = await Contact.create({
-      name,
-      email: normalizedEmail,
-      message,
-      phone: phone || undefined,
-      phoneType: phoneType || undefined,
-      wantsReply: wantsReply === "yes" || wantsReply === true,
-    });
-
-    return res.status(201).json({ ok: true, id: doc._id });
-  } catch (err) {
-    console.error("❌ /api/contact error:", err);
-    return res.status(500).json({ ok: false, error: "SERVER_ERROR" });
-  }
-});
 
 /* =========================
    Start Server AFTER DB
 ========================= */
 
-connectDB(MONGODB_URI)
-  .then(() => {
-    console.log("✅ Connected to MongoDB");
-    app.listen(PORT, () => {
-      console.log(`✅ Backend running on port ${PORT}`);
+let server: ReturnType<typeof app.listen>;
+
+async function startServer() {
+  try {
+    // Connect to database first
+    await connectDB(MONGODB_URI, {
+      reuseExisting: true,
+      label: NODE_ENV,
     });
-  })
-  .catch((err) => {
-    console.error("❌ MongoDB connection failed:", err);
+    
+    // Start server only after successful DB connection
+    server = app.listen(PORT, '0.0.0.0', () => {
+      // console.log(`✅ Server running on port ${PORT} in ${NODE_ENV} mode`);
+      // console.log(`✅ Health check: http://localhost:${PORT}/health`);
+    });
+    
+    // Handle server errors
+    server.on('error', (error: NodeJS.ErrnoException) => {
+      if (error.code === 'EADDRINUSE') {
+        // console.error(`❌ Port ${PORT} is already in use`);
+      } else {
+        // console.error('❌ Server error:', error);
+      }
+      process.exit(1);
+    });
+    
+  } catch (err) {
+    // console.error("❌ Failed to start server:", err);
     process.exit(1);
-  });
+  }
+}
+
+/* =========================
+   Graceful Shutdown
+========================= */
+
+async function gracefulShutdown(signal: string) {
+  console.log(`\n⚠️  ${signal} received. Starting graceful shutdown...`);
+  
+  // Close server to stop accepting new connections
+  if (server) {
+    server.close(() => {
+      // console.log('✅ HTTP server closed');
+    });
+  }  // Close database connection
+  try {
+    const mongoose = await import('mongoose');
+    await mongoose.default.connection.close();
+    // console.log('✅ Database connection closed');
+  } catch (err) {
+    // console.error('❌ Error closing database:', err);
+  }
+  
+  process.exit(0);
+}
+
+// Handle graceful shutdown signals
+process.on('SIGTERM', () => gracefulShutdown('SIGTERM'));
+process.on('SIGINT', () => gracefulShutdown('SIGINT'));
+
+// Handle uncaught errors
+process.on('uncaughtException', (err) => {
+  // console.error('❌ Uncaught Exception:', err);
+  gracefulShutdown('UNCAUGHT_EXCEPTION');
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  // console.error('❌ Unhandled Rejection at:', promise, 'reason:', reason);
+  gracefulShutdown('UNHANDLED_REJECTION');
+});
+
+// Start the application
+startServer();

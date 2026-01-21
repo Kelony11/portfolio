@@ -32,7 +32,7 @@
 }
 
 .section-title {
-  font-size: 2.5rem;
+  font-size: 1.9rem;
   margin-bottom: 1.5rem;
   background: linear-gradient(135deg, #7c3aed, #a855f7);
   -webkit-background-clip: text;
@@ -118,13 +118,7 @@
 }
 
 .timeline::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: linear-gradient(180deg, #7c3aed, #a855f7);
+  display: none;
 }
 
 .timeline-item {
@@ -133,15 +127,7 @@
 }
 
 .timeline-marker {
-  position: absolute;
-  left: -3.5rem;
-  top: 0;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: #7c3aed;
-  border: 3px solid #000000;
-  box-shadow: 0 0 10px rgba(124, 58, 237, 0.5);
+  display: none;
 }
 
 .app.light .timeline-marker {
@@ -648,11 +634,11 @@
   }
 
   .timeline {
-    padding-left: 2rem;
+    padding-left: 0;
   }
 
   .timeline-marker {
-    left: -2.5rem;
+    display: none;
   }
 
   .projects-header {

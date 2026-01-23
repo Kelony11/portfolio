@@ -19,8 +19,8 @@ const ProjectsContent = () => {
       ],
     },
     {
-      title: "MyPortfolio Website",
-      description: "A full-stack MERN portfolio with smart project discovery, secure contact & feedback messaging, light/dark mode, and production-grade deployment on AWS.",
+      title: "MyPortfolio",
+      description: "A full-stack production-ready MERN platform with smart project discovery, secure contact & feedback messaging, light/dark mode, and production-grade deployment on AWS.",
       technologies: ["React", "TypeScript", "JavaScript", "Node.js", "MongoDB", "AWS EC2", "Cloudfare", "Express.js"],
       github: "https://github.com/Kelony11/portfolio",
       features: [

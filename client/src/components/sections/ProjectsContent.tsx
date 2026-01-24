@@ -112,6 +112,18 @@ const ProjectsContent = () => {
         "POSIX-style worker API (create/yield/join)",
         "Benchmarks & stats (runtime, context switches)",
       ],
+    },
+    {
+      title: "Midnight Landing",
+      description: "A sleek single-page landing page with a dark gradient theme, custom typography, and a lightweight 1–5 star rating prompt for quick user feedback.",
+      technologies: ["HTML", "CSS", "JavaScript", "Google Fonts"],
+      github: "https://github.com/Kelony11/midnight_landing",
+      features: [
+        "Dark gradient UI with readable, modern styling",
+        "Custom typography via Google Fonts",
+        "Tech stack section with colored category labels",
+        "Timed 1–5 star rating + optional feedback prompt",
+      ],
     }
 
   ];

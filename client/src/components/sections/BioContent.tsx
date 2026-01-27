@@ -15,7 +15,7 @@ const BioContent = () => {
       <div className="bio-section">
         <h3>Background</h3>
         <p>
-          I’ve interned at Johnson & Johnson and Cisco, where I built internal tools using Python, React, and SQL to improve automation and support data-driven decision-making across teams.
+          I’ve interned at Johnson & Johnson, where I built internal tools using Python, React, and SQL to improve automation and support data-driven decision-making across teams.
           My academic and personal projects, including TradeLens and FittedIn, span backend platforms, cloud deployment (AWS/Firebase), and the integration of external data sources through APIs.
         </p>
       </div>

@@ -1,14 +1,14 @@
 .content-monitor {
   margin-top: 10rem;
   flex: 1;
-  border: 3px solid #7c3aed;
+  border: 3px solid #06B6D4;
   border-radius: 16px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   min-height: 0;
   position: relative;
-  background: rgba(124, 58, 237, 0.05);
+  background: rgba(6, 182, 212, 0.05);
 }
 
 .app.mobile .content-monitor {
@@ -17,7 +17,7 @@
 
 .monitor-header {
   padding: 1.5rem;
-  border-bottom: 2px solid #7c3aed;
+  border-bottom: 2px solid #06B6D4;
   text-align: center;
   flex-shrink: 0;
 }
@@ -66,26 +66,26 @@
 }
 
 .scrollable-area::-webkit-scrollbar-track {
-  background: rgba(124, 58, 237, 0.1);
+  background: rgba(6, 182, 212, 0.1);
   border-radius: 10px;
 }
 
 .scrollable-area::-webkit-scrollbar-thumb {
-  background: #7c3aed;
+  background: #06B6D4;
   border-radius: 10px;
   border: 2px solid transparent;
   background-clip: padding-box;
 }
 
 .scrollable-area::-webkit-scrollbar-thumb:hover {
-  background: #a855f7;
+  background: #22D3EE;
   background-clip: padding-box;
 }
 
 /* Firefox scrollbar */
 .scrollable-area {
   scrollbar-width: thin;
-  scrollbar-color: #7c3aed rgba(124, 58, 237, 0.1);
+  scrollbar-color: #06B6D4 rgba(6, 182, 212, 0.1);
 }
 
 .scroll-indicator {
@@ -103,13 +103,13 @@
 .scroll-track {
   width: 4px;
   height: 100%;
-  background: rgba(124, 58, 237, 0.2);
+  background: rgba(6, 182, 212, 0.2);
   border-radius: 2px;
 }
 
 .github-link {
   padding: 1rem;
-  border-top: 2px solid #7c3aed;
+  border-top: 2px solid #06B6D4;
   display: flex;
   justify-content: center;
   flex-shrink: 0;
@@ -121,7 +121,7 @@
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
   background: transparent;
-  border: 2px solid #7c3aed;
+  border: 2px solid #06B6D4;
   border-radius: 8px;
   color: inherit;
   text-decoration: none;
@@ -130,7 +130,7 @@
 }
 
 .github-btn:hover {
-  background: rgba(124, 58, 237, 0.2);
+  background: rgba(6, 182, 212, 0.2);
   transform: translateY(-2px);
 }
 
@@ -141,20 +141,20 @@
 
 /* Light theme adjustments */
 .app.light .content-monitor {
-  border-color: #5b21b6;
+  border-color: #0c5f73;
   background: rgba(91, 33, 182, 0.05);
 }
 
 .app.light .monitor-header {
-  border-color: #5b21b6;
+  border-color: #0c5f73;
 }
 
 .app.light .github-link {
-  border-color: #5b21b6;
+  border-color: #0c5f73;
 }
 
 .app.light .github-btn {
-  border-color: #5b21b6;
+  border-color: #0c5f73;
 }
 
 .app.light .github-btn:hover {
@@ -166,9 +166,9 @@
 }
 
 .app.light .scrollable-area::-webkit-scrollbar-thumb {
-  background: #5b21b6;
+  background: #0c5f73;
 }
 
 .app.light .scrollable-area::-webkit-scrollbar-thumb:hover {
-  background: #7c3aed;
+  background: #06B6D4;
 }

@@ -4,7 +4,7 @@
   right: 18rem;
   width: 70px;
   height: 70px;
-  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  background: linear-gradient(135deg, #06B6D4, #22D3EE);
   border: none;
   border-radius: 50%;
   display: flex;
@@ -15,7 +15,7 @@
   cursor: pointer;
   transition: all 0.3s ease;
   z-index: 100;
-  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.4);
+  box-shadow: 0 8px 24px rgba(6, 182, 212, 0.4);
   animation: float 3s ease-in-out infinite;
 }
 @keyframes float {
@@ -29,7 +29,7 @@
 
 .floating-feedback:hover {
   transform: translateY(-50%) scale(1.1);
-  box-shadow: 0 12px 32px rgba(124, 58, 237, 0.6);
+  box-shadow: 0 12px 32px rgba(6, 182, 212, 0.6);
   animation: none;
 }
 
@@ -60,11 +60,11 @@
 /* Light theme */
 .app.light .floating-feedback {
   border-color: #000000;
-  box-shadow: 0 8px 24px rgba(91, 33, 182, 0.4);
+  box-shadow: 0 8px 24px rgba(38, 217, 248, 0.4);
 }
 
 .app.light .floating-feedback:hover {
-  box-shadow: 0 12px 32px rgba(91, 33, 182, 0.6);
+  box-shadow: 0 12px 32px rgba(38, 217, 248, 0.6);
 }
 
 /* Modal Styles - NO CLICK OUTSIDE TO CLOSE */
@@ -83,7 +83,7 @@
 
 .feedback-viewer {
   background: #1a1a1a;
-  border: 2px solid #7c3aed;
+  border: 2px solid #06B6D4;
   border-radius: 16px;
   width: 90%;
   max-width: 500px;
@@ -95,7 +95,7 @@
 
 .app.light .feedback-viewer {
   background: #ffffff;
-  border-color: #5b21b6;
+  border-color: #0d5580;
 }
 
 .feedback-header {
@@ -103,21 +103,21 @@
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem;
-  border-bottom: 2px solid #7c3aed;
+  border-bottom: 2px solid #06B6D4;
 }
 
 .app.light .feedback-header {
-  border-bottom-color: #5b21b6;
+  border-bottom-color: #06B6D4;
 }
 
 .feedback-header h3 {
   margin: 0;
   font-size: 1.5rem;
-  color: #7c3aed;
+  color: #06B6D4;
 }
 
 .app.light .feedback-header h3 {
-  color: #5b21b6;
+  color: #32d9f7;
 }
 
 .close-btn {
@@ -134,7 +134,7 @@
 }
 
 .close-btn:hover {
-  background: rgba(124, 58, 237, 0.2);
+  background: rgba(6, 182, 212, 0.2);
   transform: scale(1.1);
 }
 
@@ -165,7 +165,7 @@
 .feedback-form select,
 .feedback-form textarea {
   padding: 0.75rem;
-  border: 2px solid #7c3aed;
+  border: 2px solid #06B6D4;
   border-radius: 8px;
   background: transparent;
   color: inherit;
@@ -177,8 +177,8 @@
 .feedback-form select:focus,
 .feedback-form textarea:focus {
   outline: none;
-  border-color: #a855f7;
-  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+  border-color: #22D3EE;
+  box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
 }
 
 .feedback-form select {
@@ -210,7 +210,7 @@
 
 .feedback-form .submit-btn {
   padding: 1rem 2rem;
-  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  background: linear-gradient(135deg, #06B6D4, #22D3EE);
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -222,7 +222,7 @@
 
 .feedback-form .submit-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(124, 58, 237, 0.4);
+  box-shadow: 0 8px 16px rgba(6, 182, 212, 0.4);
 }
 
 .feedback-form .submit-btn:disabled {
@@ -231,7 +231,7 @@
 }
 
 .app.light .feedback-form .submit-btn {
-  background: linear-gradient(135deg, #5b21b6, #7c3aed);
+  background: linear-gradient(135deg, #0b525c, #06c3e4);
 }
 
 /* Success Message */

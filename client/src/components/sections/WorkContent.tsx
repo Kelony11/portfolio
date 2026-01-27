@@ -59,7 +59,7 @@ const WorkContent = () => {
           </div>
         </div> */}
 
-        <div className="timeline-item">
+        {/* <div className="timeline-item">
           <div className="timeline-marker"></div>
           <div className="timeline-content">
             <div className="work-header">
@@ -82,7 +82,7 @@ const WorkContent = () => {
               <li>Improved visibility and sped up decisions for cross-site teams</li>
             </ul>
           </div>
-        </div>
+        </div> */}
         
       </div>
     </div>

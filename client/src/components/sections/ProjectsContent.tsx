@@ -19,8 +19,8 @@ const ProjectsContent = () => {
       ],
     },
     {
-      title: "MyPortfolio Website",
-      description: "A full-stack MERN portfolio with smart project discovery, secure contact & feedback messaging, light/dark mode, and production-grade deployment on AWS.",
+      title: "MyPortfolio",
+      description: "A full-stack production-ready MERN platform with smart project discovery, secure contact & feedback messaging, light/dark mode, and production-grade deployment on AWS.",
       technologies: ["React", "TypeScript", "JavaScript", "Node.js", "MongoDB", "AWS EC2", "Cloudfare", "Express.js"],
       github: "https://github.com/Kelony11/portfolio",
       features: [
@@ -111,6 +111,18 @@ const ProjectsContent = () => {
         "Non-recursive mutexes with FIFO wait queues",
         "POSIX-style worker API (create/yield/join)",
         "Benchmarks & stats (runtime, context switches)",
+      ],
+    },
+    {
+      title: "Midnight Landing",
+      description: "A sleek single-page landing page with a dark gradient theme, custom typography, and a lightweight 1–5 star rating prompt for quick user feedback.",
+      technologies: ["HTML", "CSS", "JavaScript", "Google Fonts"],
+      github: "https://github.com/Kelony11/midnight_landing",
+      features: [
+        "Dark gradient UI with readable, modern styling",
+        "Custom typography via Google Fonts",
+        "Tech stack section with colored category labels",
+        "Timed 1–5 star rating + optional feedback prompt",
       ],
     }
 

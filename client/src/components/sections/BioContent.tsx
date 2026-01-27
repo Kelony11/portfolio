@@ -41,7 +41,7 @@ const BioContent = () => {
             </div>
             <h4>Frontend</h4>
             <ul className="skill-list">
-              <li>React & TypeScript</li>
+              <li>React</li>
               <li>JavaScript/TypeScript</li>
               <li>SwiftUI</li>
               <li>TanStack Router</li>
@@ -58,7 +58,7 @@ const BioContent = () => {
             </div>
             <h4>Backend</h4>
             <ul className="skill-list">
-              <li>Node.js & Express (REST APIs, Middleware)</li>
+              <li>Node.js & Express</li>
               <li>Python</li>
               <li>Swift</li>
               <li>Rate Limiting & API Security</li>
@@ -90,9 +90,9 @@ const BioContent = () => {
             </div>
             <h4>Cloud & DevOps</h4>
             <ul className="skill-list">
-              <li>AWS EC2 (Production Deployment)</li>
+              <li>AWS EC2</li>
               <li>Firebase (Auth, Storage)</li>
-              <li>Cloudflare Turnstile (Bot Protection)</li>
+              <li>Cloudflare Turnstile</li>
               <li>Domain & DNS Management</li>
             </ul>
           </div>

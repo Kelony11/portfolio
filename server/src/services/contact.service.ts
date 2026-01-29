@@ -16,12 +16,10 @@ export const createContactService = async (data: any, res: any, req: any) => {
     // Honeypot (bots think they succeeded)
     if (company) {
         res.status(200).json({ ok: true });
-        return null;
     }
 
     if (!name || !email || !message) {
-        res.status(400).json({ ok: false, error: "MISSING_FIELDS" });
-        return null;
+        return res.status(400).json({ ok: false, error: "MISSING_FIELDS" });
     }
 
     if (!turnstileToken) {

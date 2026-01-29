@@ -11,7 +11,7 @@ export const createContactController = async (req: Request, res: Response) => {
     try {
         // Save to MongoDB (service)
         const result = await createContactService(req.body, res, req);
-        if (!result || res.headersSent) return;
+        if (!result) return;
         const data = result.toObject();
         
         // 1) Send email to myself 
@@ -31,8 +31,6 @@ export const createContactController = async (req: Request, res: Response) => {
                 html: visitorTemplate(data),
             })
         }
-
-
 
         // Respond to frontend
         return res.status(201).json({ ok: true, data });

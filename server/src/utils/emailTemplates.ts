@@ -22,7 +22,7 @@ export function contactTemplate(data: {
       <p><b>Wants Reply:</b> ${data.wantsReply ? "Yes" : "No"}</p>
       <hr/>
       <p><b>Message:</b></p>
-      <p>${escapeHtml(data.message).replace("/\n/g", "<br/>")}</p>
+      <p>${escapeHtml(data.message).replace(/\n/g, "<br/>")}</p>
     </div>
   `;
 }
@@ -37,7 +37,37 @@ export function feedbackTemplate(data: {
       <p><b>Feedback Type:</b> ${escapeHtml(data.type)}</p>
       <hr/>
       <p><b>Message:</b></p>
-      <p>${escapeHtml(data.message).replace("/\n/g", "<br/>")}</p>
+      <p>${escapeHtml(data.message).replace(/\n/g, "<br/>")}</p>
     </div>
   `;
+}
+
+// For thanking visitors 
+export function visitorTemplate(data: {
+  name: string;
+  email: string;
+  phone?: string;
+  wantsReply?: boolean;
+  message: string;
+}) {
+  return `
+    <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+      <p>Hi ${escapeHtml(data.name)},</p>
+
+      <p>
+        Thanks for reaching out through my portfolio. I’ve received your message
+        and appreciate you taking the time to connect.
+      </p>
+
+      <p>
+        I’ll review your message and get back to you as soon as I can.
+      </p>
+
+      <p style="margin-top: 24px;">
+        Best regards,<br/>
+        <strong>Kelvin Ihezue</strong>
+      </p>
+    </div>
+  `;
+
 }

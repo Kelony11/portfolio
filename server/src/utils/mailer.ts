@@ -4,6 +4,7 @@ type SendPortfolioEmailArgs = {
   type: "CONTACT" | "FEEDBACK" | "TEST";
   subject: string;
   html: string;
+  to?: string;
   replyTo?: string;
 };
 
@@ -18,15 +19,15 @@ const transporter = nodemailer.createTransport({
 });
 
 export async function sendPortfolioEmail({
-  type,
   subject,
   html,
+  to,
   replyTo,
 }: SendPortfolioEmailArgs) {
   return transporter.sendMail({
-    from: `"Portfolio Bot" <${process.env.MAIL_USER}>`,
-    to: process.env.MAIL_TO,
-    subject: `${subject}`,
+    from: `"Kelvin Ihezue" <${process.env.MAIL_USER}>`,
+    to: to ?? process.env.MAIL_TO, 
+    subject,
     html,
     ...(replyTo ? { replyTo } : {}),
   });

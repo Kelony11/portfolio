@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { createContactService } from "../services/contact.service";
 import { sendPortfolioEmail } from "../utils/mailer";
-import { contactTemplate } from "../utils/emailTemplates";
+import { contactTemplate, visitorTemplate } from "../utils/emailTemplates";
 
 
 export const createContactController = async (req: Request, res: Response) => {
@@ -13,12 +13,25 @@ export const createContactController = async (req: Request, res: Response) => {
         const result = await createContactService(req.body, res, req);
         const data = result.toObject();
         
-        // Send email 
+        // 1) Send email to myself 
         await sendPortfolioEmail({
             type: "CONTACT",
             subject: `📥 Portfolio Alert: ${result.name} sent a message`,
             html: contactTemplate(data),
         })
+
+        // 2) Auto-reply the visitor (Contact Section)
+        if (data.wantsReply && data.email) {
+            await sendPortfolioEmail({
+                type: "CONTACT",
+                to: data.email,
+                ...(process.env.MAIL_TO ? { replyTo: process.env.MAIL_TO } : {}),
+                subject: "Thanks for reaching out. Message received.",
+                html: visitorTemplate(data),
+            })
+        }
+
+
 
         // Respond to frontend
         return res.status(201).json({ ok: true, data });

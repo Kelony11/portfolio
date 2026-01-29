@@ -158,7 +158,7 @@ modern user experience with light/dark mode support.
 ### **🔮 What's Next**
 Planned enhancements for future iterations:
   - **API & Response Caching (Redis / in-memory caching)**
-  - **Optional auto-reply confirmation emails**
+  - **Automatically sets the site language using the user’s browser language (saved in localStorage for future visits). Users can also manually choose their preferred language anytime using a dedicated language switcher**
   - **Additional UI animations & accessibility improvements**
 
 ---

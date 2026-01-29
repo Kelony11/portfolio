@@ -8,8 +8,8 @@ export interface ContactDoc {
     phone?: string;
     phoneType?: string;
     wantsReply?: boolean;
-    createdAt?: Date;
-    updatedAt?: Date;
+    createdAt: Date;
+    updatedAt: Date;
 }
 
 const ContactSchema = new mongoose.Schema<ContactDoc>(

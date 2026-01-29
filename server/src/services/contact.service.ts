@@ -14,18 +14,23 @@ export const createContactService = async (data: any, res: any, req: any) => {
     } = data;
 
     // Honeypot (bots think they succeeded)
-    if (company) return res.status(200).json({ ok: true });
+    if (company) {
+        res.status(200).json({ ok: true });
+        return null;
+    }
 
     if (!name || !email || !message) {
-        return res.status(400).json({ ok: false, error: "MISSING_FIELDS" });
+        res.status(400).json({ ok: false, error: "MISSING_FIELDS" });
+        return null;
     }
 
     if (!turnstileToken) {
-        return res.status(400).json({
+        res.status(400).json({
             ok: false,
             error: "CAPTCHA_REQUIRED",
             message: "Captcha required.",
         });
+        return null;
     }
 
     const ip =
@@ -38,7 +43,6 @@ export const createContactService = async (data: any, res: any, req: any) => {
 
     if (!result.success) {
         throw new Error("Captcha verification failed.");
-
     }
 
     const normalizedEmail = String(email).toLowerCase().trim();

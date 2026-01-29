@@ -11,7 +11,7 @@ export const createContactController = async (req: Request, res: Response) => {
     try {
         // Save to MongoDB (service)
         const result = await createContactService(req.body, res, req);
-        if (!result) return;
+        if (!result || res.headersSent) return;
         const data = result.toObject();
         
         // 1) Send email to myself 

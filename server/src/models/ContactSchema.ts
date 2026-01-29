@@ -1,7 +1,16 @@
 import mongoose from "mongoose";
-import { type } from "os";
 
-const ContactSchema = new mongoose.Schema(
+// Shape of a contact message stored in MongoDB.
+export interface ContactDoc {
+    name: string;
+    email: string;
+    message: string;
+    phone?: string;
+    phoneType?: string;
+    wantsReply?: boolean;
+}
+
+const ContactSchema = new mongoose.Schema<ContactDoc>(
 
     {
         name: { type: String, required: true, trim: true, maxlength: 80},
@@ -20,4 +29,4 @@ const ContactSchema = new mongoose.Schema(
 // Auto-delete messages ~30 days after createdAt
 ContactSchema.index({ createdAt: 1}, {expireAfterSeconds: 60 * 60 * 24 * 30});
 
-export const Contact = mongoose.model("Contact", ContactSchema);
+export const Contact = mongoose.model<ContactDoc>("Contact", ContactSchema);

@@ -127,7 +127,7 @@ const ProjectsContent = () => {
     },
     {
       title: "SportsPredictor (Django Package)",
-      description: "A web app that lets fans make game predictions, see live results, and manage matchups through a built-in admin dashboard—packaged for reuse across projects.",
+      description: "A web app that lets fans make game predictions, see live results, and manage matchups through a built-in admin dashboard, packaged for reuse across projects.",
       technologies: ["Django", "Python", "SQLite", "Django REST"],
       github: "https://github.com/Kelony11/sports_predictor",
       features: [

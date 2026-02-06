@@ -43,6 +43,19 @@ const ProjectsContent = () => {
       ],
     },
     {
+      title: "SportsPredictor (Django Package)",
+      description: "A web app that lets fans make game predictions, see live results, and manage matchups through a built-in admin dashboard, packaged for reuse across projects.",
+      technologies: ["Django", "Python", "SQLite", "Django REST"],
+      github: "https://github.com/Kelony11/sports_predictor",
+      features: [
+        "Fan voting flow for game outcomes",
+        "Real-time results page with prediction totals and percentages",
+        "Admin dashboard to create & manage matchups and view stored data",
+        "⚡️⬇️ Install: run `pip install sports_predictor` on your terminal",
+      ],
+      
+    },
+    {
       title: "TickerTensor",
       description: "Node.js tool that ingests stock price CSVs from multiple sources and aligns them by date into a clean, consistent dataset for faster quantitative analysis and moving-window statistics.",
       technologies: ["JavaScript", "Node.js", "Jasmine", "Git"],
@@ -125,19 +138,6 @@ const ProjectsContent = () => {
         "Timed 1–5 star rating + optional feedback prompt",
       ],
     },
-    {
-      title: "SportsPredictor (Django Package)",
-      description: "A web app that lets fans make game predictions, see live results, and manage matchups through a built-in admin dashboard, packaged for reuse across projects.",
-      technologies: ["Django", "Python", "SQLite", "Django REST"],
-      github: "https://github.com/Kelony11/sports_predictor",
-      features: [
-        "Fan voting flow for game outcomes",
-        "Real-time results page with prediction totals and percentages",
-        "Admin dashboard to create & manage matchups and view stored data",
-        "⚡️⬇️ Install: run `pip install sports_predictor` on your terminal",
-      ],
-      
-    }
 
   ];
 

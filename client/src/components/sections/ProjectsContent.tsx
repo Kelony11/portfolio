@@ -132,7 +132,7 @@ const ProjectsContent = () => {
       github: "https://github.com/Kelony11/sports_predictor",
       features: [
         "Fan voting flow for game outcomes",
-        "Real-time results page with totals and vote percentages",
+        "Real-time results page with prediction totals and percentages",
         "Admin dashboard to create & manage matchups and view stored data",
         "⚡️⬇️ Install: run `pip install sports_predictor` on your terminal",
       ],

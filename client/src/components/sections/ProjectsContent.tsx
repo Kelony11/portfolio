@@ -124,6 +124,19 @@ const ProjectsContent = () => {
         "Tech stack section with colored category labels",
         "Timed 1–5 star rating + optional feedback prompt",
       ],
+    },
+    {
+      title: "SportsPredictor (Django Package)",
+      description: "A web app that lets fans make game predictions, see live results, and manage matchups through a built-in admin dashboard—packaged for reuse across projects.",
+      technologies: ["Django", "Python", "SQLite", "Django REST"],
+      github: "https://github.com/Kelony11/sports_predictor",
+      features: [
+        "Fan voting flow for game outcomes",
+        "Real-time results page with totals and vote percentages",
+        "Admin dashboard to create & manage matchups and view stored data",
+        "⚡️⬇️ Install: run `pip install sports_predictor` on your terminal",
+      ],
+      
     }
 
   ];

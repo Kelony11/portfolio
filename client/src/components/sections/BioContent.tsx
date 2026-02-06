@@ -60,7 +60,7 @@ const BioContent = () => {
             <ul className="skill-list">
               <li>Node.js & Express</li>
               <li>Python</li>
-              <li>Swift</li>
+              <li>Django (Admin, ORM, Routing)</li>
               <li>Rate Limiting & API Security</li>
             </ul>
           </div>
@@ -120,6 +120,7 @@ const BioContent = () => {
               <span className="tech-tag">React</span>
               <span className="tech-tag">Node.js</span>
               <span className="tech-tag">Express</span>
+              <span className="tech-tag">Django</span>
               <span className="tech-tag">SwiftUI</span>
               <span className="tech-tag">TanStack Router</span>
               <span className="tech-tag">Sequelize</span>

@@ -31,18 +31,6 @@ const ProjectsContent = () => {
       ],
     },
     {
-      title: "RU FileSystem",
-      description: "A user-space file system built with FUSE, supporting file and directory operations via inodes, bitmaps, and path resolution.",
-      technologies: ["C", "FUSE API", "Linux/Unix", "Makefile"],
-      github: "https://github.com/Kelony11/ru-filesystem",
-      features: [
-        "File-Backed Disk Emulation",
-        "Bitmap-Based Block and Inode Allocation",
-        "UNIX-Style Inode Architecture",
-        "Directory Management and Core File Operations",
-      ],
-    },
-    {
       title: "SportsPredictor (Django Package)",
       description: "A web app that lets fans make game predictions, see live results, and manage matchups through a built-in admin dashboard, packaged for reuse across projects.",
       technologies: ["Django", "Python", "SQLite", "Django REST"],
@@ -54,6 +42,31 @@ const ProjectsContent = () => {
         "⚡️⬇️ Install: run `pip install sports_predictor` on your terminal",
       ],
       
+    },
+    {
+      title: "MarketMetrics",
+      description:
+        "A Django app that ingests Yahoo Finance historical stock data, stores it in a database, and serves an HTML dashboard plus a JSON REST API for querying price history.",
+      technologies: ["Python", "Django", "pandas", "yfinance"],
+      github: "https://github.com/Kelony11/_market_metrics",
+      features: [
+        "Yahoo Finance OHLCV Data Ingestion to CSV",
+        "Data Validation and Summary Statistics",
+        "Price and Volume Chart Generation",
+        "Django ORM Storage, HTML View & JSON REST Endpoint",
+      ],
+    },
+    {
+      title: "ProceduralRoom",
+      description: "A Blender Python project that procedurally generates a furnished 3D room using reusable assets, scripted geometry, and material assignments.",
+      technologies: ["Python", "Blender API", "3D Modeling"],
+      github: "https://github.com/Kelony11/procedural_room",
+      features: [
+        "Procedural Floor Tile Grid Generation",
+        "Reusable Chair and Table Asset Importing",
+        "Automated Scene Construction via Python",
+        "Material Assignment and Scene Organization",
+      ],
     },
     {
       title: "TickerTensor",
@@ -88,6 +101,18 @@ const ProjectsContent = () => {
         "Secure Authentication System",
         "Goal Tracking and Progress Monitoring",
         "Database Management",
+      ],
+    },
+    {
+      title: "RU FileSystem",
+      description: "A user-space file system built with FUSE, supporting file and directory operations via inodes, bitmaps, and path resolution.",
+      technologies: ["C", "FUSE API", "Linux/Unix", "Makefile"],
+      github: "https://github.com/Kelony11/ru-filesystem",
+      features: [
+        "File-Backed Disk Emulation",
+        "Bitmap-Based Block and Inode Allocation",
+        "UNIX-Style Inode Architecture",
+        "Directory Management and Core File Operations",
       ],
     },
     {

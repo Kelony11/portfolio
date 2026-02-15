@@ -47,7 +47,7 @@ const ProjectsContent = () => {
       title: "MarketMetrics",
       description:
         "A Django app that ingests Yahoo Finance historical stock data, stores it in a database, and serves an HTML dashboard plus a JSON REST API for querying price history.",
-      technologies: ["Python", "Django", "pandas", "yfinance"],
+      technologies: ["Python", "Django", "pandas", "Yahoo Finance API"],
       github: "https://github.com/Kelony11/_market_metrics",
       features: [
         "Yahoo Finance OHLCV Data Ingestion to CSV",

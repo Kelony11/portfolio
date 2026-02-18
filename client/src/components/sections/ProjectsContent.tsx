@@ -69,6 +69,43 @@ const ProjectsContent = () => {
       ],
     },
     {
+      title: "ImageFinder",
+      description: "Java web app that crawls a user-provided URL, discovers same-domain pages in parallel, and returns a JSON list of all image URLs found across the crawl.",
+      technologies: ["Java", "Maven", "Jetty", "JSoup"],
+      github: "https://github.com/Kelony11/image_finder",
+      features: [
+        "Multi-Threaded Same-Domain Web Crawling",
+        "Image URL Extraction and JSON Response",
+        "Visited-Set Deduplication to Prevent Re-Crawls",
+        "Front-End UI for Submitting URLs and Viewing Results",
+      ],
+    },
+    {
+      title: "QuantSnap",
+      description: "Python analytics pipeline & Flask dashboard that downloads Yahoo Finance data, computes returns and rolling volatility, backtests a moving-average crossover strategy, and displays precomputed charts and metrics.",
+      technologies: ["Python", "Flask", "pandas", "NumPy", "matplotlib", "Yahoo Finance API"],
+      github: "https://github.com/Kelony11/quant_snap",
+      features: [
+        "Yahoo Finance Data Download to Clean CSVs (Stock & ETF)",
+        "Daily Returns and 20-Day Rolling Volatility Analysis",
+        "Moving Average Crossover Backtest (20/50) with No Look-Ahead Bias",
+        "Flask Dashboard with `/`, `/data/`, `/results/` Pages for Charts + Metrics",
+      ],
+    },
+    {
+      title: "CFoundations",
+      description:
+        "A C console project practicing fundamentals through four mini-programs: a calculator, grade converter, pattern printer, and number analyzer with input validation.",
+      technologies: ["C", "GCC", "Makefile", "Linux/Unix"],
+      github: "https://github.com/Kelony11/c_foundations",
+      features: [
+        "Floating-Point Calculator with Divide-by-Zero Handling",
+        "Numeric-to-Letter Grade Conversion with Range Validation",
+        "Nested-Loop Pattern Printing (Triangles & Diamond)",
+        "Digit Analysis: Count, Sum, Even/Odd, and Reverse",
+      ],
+    },
+    {
       title: "TickerTensor",
       description: "Node.js tool that ingests stock price CSVs from multiple sources and aligns them by date into a clean, consistent dataset for faster quantitative analysis and moving-window statistics.",
       technologies: ["JavaScript", "Node.js", "Jasmine", "Git"],
